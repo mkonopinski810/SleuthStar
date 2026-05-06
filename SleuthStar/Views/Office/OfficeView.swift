@@ -27,6 +27,8 @@ struct OfficeView: View {
                         path.append(AppRoute.leaderboard)
                     }
 
+                    TellAFriendPill()
+
                     OfficeRoomView(
                         onComputerTap: { path.append(AppRoute.shop) }
                     )
@@ -459,5 +461,50 @@ private struct LeaderboardPill: View {
             .glassCard(corner: 14)
         }
         .buttonStyle(PressableButtonStyle())
+    }
+}
+
+private struct TellAFriendPill: View {
+    private var appStoreURL: URL {
+        ForceUpdateChecker.appStoreURL
+    }
+
+    private var shareMessage: String {
+        "Solving noir cases in Sleuth Star. Try it: \(appStoreURL.absoluteString)"
+    }
+
+    var body: some View {
+        ShareLink(
+            item: appStoreURL,
+            subject: Text("Sleuth Star"),
+            message: Text(shareMessage)
+        ) {
+            HStack(spacing: 12) {
+                ZStack {
+                    Circle()
+                        .fill(Color(red: 0.55, green: 0.50, blue: 0.95).opacity(0.18))
+                        .frame(width: 38, height: 38)
+                    Image(systemName: "person.2.fill")
+                        .font(.system(size: 14, weight: .bold))
+                        .foregroundStyle(Color(red: 0.65, green: 0.60, blue: 1.00))
+                }
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("TELL A FRIEND")
+                        .font(.system(size: 10, weight: .heavy, design: .rounded))
+                        .tracking(2)
+                        .foregroundStyle(Color(red: 0.65, green: 0.60, blue: 1.00))
+                    Text("Share Sleuth Star")
+                        .font(.system(.subheadline, design: .serif).weight(.semibold))
+                        .foregroundStyle(Theme.textPrimary)
+                }
+                Spacer()
+                Image(systemName: "square.and.arrow.up")
+                    .font(.system(size: 13, weight: .bold))
+                    .foregroundStyle(Theme.textMuted)
+            }
+            .padding(12)
+            .glassCard(corner: 14)
+        }
+        .simultaneousGesture(TapGesture().onEnded { Haptics.tap() })
     }
 }

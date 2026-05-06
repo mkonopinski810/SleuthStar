@@ -575,12 +575,18 @@ private struct PayoutView: View {
 
             Spacer()
 
-            PrimaryButton(
-                title: "Return to the Office",
-                systemImage: "house.fill",
-                style: .gold
-            ) {
-                path = NavigationPath()
+            VStack(spacing: 10) {
+                if isGuilty, let ms = caseTimeMs {
+                    ChallengeAFriendButton(crimeCase: crimeCase, milliseconds: ms)
+                }
+
+                PrimaryButton(
+                    title: "Return to the Office",
+                    systemImage: "house.fill",
+                    style: .gold
+                ) {
+                    path = NavigationPath()
+                }
             }
             .padding(.horizontal, 22)
             .padding(.bottom, 16)
@@ -606,5 +612,42 @@ private struct PayoutView: View {
             }
             Spacer()
         }
+    }
+}
+
+private struct ChallengeAFriendButton: View {
+    let crimeCase: CrimeCase
+    let milliseconds: Int
+
+    private var appStoreURL: URL { ForceUpdateChecker.appStoreURL }
+
+    private var shareMessage: String {
+        let time = CaseTimer.format(milliseconds: milliseconds)
+        return "I cracked \"\(crimeCase.title)\" in \(time) on Sleuth Star. Beat my time: \(appStoreURL.absoluteString)"
+    }
+
+    var body: some View {
+        ShareLink(
+            item: appStoreURL,
+            subject: Text("Beat my time on \(crimeCase.title)"),
+            message: Text(shareMessage)
+        ) {
+            HStack(spacing: 10) {
+                Image(systemName: "person.2.fill")
+                    .font(.system(size: 14, weight: .bold))
+                Text("Challenge a Friend")
+                    .font(.system(.subheadline, design: .serif).weight(.semibold))
+                Image(systemName: "square.and.arrow.up")
+                    .font(.system(size: 13, weight: .bold))
+            }
+            .foregroundStyle(Theme.gold)
+            .padding(.horizontal, 18)
+            .padding(.vertical, 12)
+            .frame(maxWidth: .infinity)
+            .background(
+                Capsule().strokeBorder(Theme.gold.opacity(0.55), lineWidth: 1.2)
+            )
+        }
+        .simultaneousGesture(TapGesture().onEnded { Haptics.tap() })
     }
 }
