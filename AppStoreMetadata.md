@@ -77,7 +77,7 @@ detective,mystery,crime,noir,evidence,investigation,sleuth,case,puzzle,solve,who
 
 ---
 
-## What's New (4000 char max — for v1.2 release)
+## What's New (4000 char max — for v1.2.1 release)
 
 ```
 The roster just tripled. The bench just got sharper.
@@ -86,11 +86,12 @@ Nineteen new cases bring the lineup to twenty-five — from a pre-dawn bakery br
 
 The bench has new patience for chaff: submit no more than three exhibits per case, and choose well. Promotions now ride on cases solved — fingerprints don't buy you rank, and Star Sleuth waits at 100% completion.
 
-NEW IN 1.2
+NEW IN 1.2.1
 • 19 new cases (10 rookie, 4 detective, 3 veteran, 2 master)
 • Star Sleuth top rank now reachable at full completion
 • 1–3 exhibit cap on submissions — no more dump-and-pray
 • Verdict review advances at your tempo (tap through each exhibit)
+• Time Attack: pick a case from the leaderboard and run the clock
 • Tell a Friend / Challenge a Friend share — beat your time
 • Career progression now purely skill-based
 • Game Center leaderboards on every case
