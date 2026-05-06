@@ -79,6 +79,11 @@ struct ShopView: View {
                         // Item list
                         ScrollView {
                             VStack(spacing: 10) {
+                                if category == .clothing {
+                                    WardrobeMannequinView(ownedIds: game.profile.ownedItemIds)
+                                        .transition(.opacity.combined(with: .move(edge: .top)))
+                                }
+
                                 ForEach(ShopRepository.items(in: category)) { item in
                                     ShopItemCard(
                                         item: item,

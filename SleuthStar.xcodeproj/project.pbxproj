@@ -50,6 +50,7 @@
 		B0000044 /* GameCenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0000044 /* GameCenterManager.swift */; };
 		B0000045 /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0000045 /* LeaderboardView.swift */; };
 		B0000046 /* CaseTimerHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0000046 /* CaseTimerHUD.swift */; };
+		B0000047 /* WardrobeMannequinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0000047 /* WardrobeMannequinView.swift */; };
 		B0000031 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0000031 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -97,6 +98,7 @@
 		F0000044 /* GameCenterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenterManager.swift; sourceTree = "<group>"; };
 		F0000045 /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
 		F0000046 /* CaseTimerHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseTimerHUD.swift; sourceTree = "<group>"; };
+		F0000047 /* WardrobeMannequinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WardrobeMannequinView.swift; sourceTree = "<group>"; };
 		F0000031 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F0000032 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F0000033 /* SleuthStar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SleuthStar.entitlements; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				F0000029 /* ShopView.swift */,
+				F0000047 /* WardrobeMannequinView.swift */,
 			);
 			path = Shop;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				B0000044 /* GameCenterManager.swift in Sources */,
 				B0000045 /* LeaderboardView.swift in Sources */,
 				B0000046 /* CaseTimerHUD.swift in Sources */,
+				B0000047 /* WardrobeMannequinView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
