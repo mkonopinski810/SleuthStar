@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sleuth Star - Support</title>
+    <style>
+        :root {
+            --gold: #FFB347;
+            --gold-deep: #D18D14;
+            --midnight: #0A0E21;
+            --ink: #11172E;
+            --parchment: #F5E6D3;
+            --bg: #FAF6EE;
+            --text: #1A1A1A;
+            --muted: #6B6B6B;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+        .header {
+            background: linear-gradient(135deg, var(--midnight), var(--ink));
+            color: var(--parchment);
+            padding: 60px 20px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .header::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 80% 0%, rgba(255, 179, 71, 0.20), transparent 50%);
+            pointer-events: none;
+        }
+        .header h1 {
+            font-size: 2.4em;
+            margin-bottom: 6px;
+            color: var(--parchment);
+            font-weight: 800;
+            letter-spacing: 4px;
+        }
+        .header h1 .star { color: var(--gold); }
+        .header p {
+            opacity: 0.85;
+            font-size: 1.05em;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+        }
+        h2 {
+            color: var(--gold-deep);
+            font-size: 1.3em;
+            margin-top: 36px;
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #F0E5C8;
+        }
+        p, ul { margin-bottom: 16px; }
+        ul { padding-left: 24px; }
+        li { margin-bottom: 8px; }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+            box-shadow: 0 2px 12px rgba(10, 14, 33, 0.08);
+        }
+        .card h3 {
+            color: var(--gold-deep);
+            margin-bottom: 8px;
+            font-size: 1.05em;
+        }
+        a { color: var(--gold-deep); }
+        a:hover { color: var(--midnight); }
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--muted);
+            font-size: 0.9em;
+            border-top: 1px solid #E8DDC0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>SLEUTH <span class="star">STAR</span></h1>
+        <p>Support</p>
+    </div>
+
+    <div class="container">
+        <h2>Contact Us</h2>
+        <div class="card">
+            <h3>Email Support</h3>
+            <p>For bugs, feature requests, or general questions:</p>
+            <p><a href="mailto:info@luelma.com">info@luelma.com</a></p>
+            <p style="font-size: 0.95em; color: var(--muted);">We aim to respond within 2-3 business days.</p>
+        </div>
+
+        <h2>Frequently Asked Questions</h2>
+
+        <div class="card">
+            <h3>How do I save my progress?</h3>
+            <p>Progress is saved automatically after every action &mdash; collected evidence, completed cases, shop purchases, and rank advances are all stored on your device. There is no manual save.</p>
+        </div>
+
+        <div class="card">
+            <h3>How do I reset my progress?</h3>
+            <p>Uninstall and reinstall the app. All progress is stored locally on your device, and uninstalling removes it permanently. There is currently no in-app reset button.</p>
+        </div>
+
+        <div class="card">
+            <h3>How do I unlock the higher-tier cases?</h3>
+            <p>Higher-tier cases (Detective, Veteran, Master) require both <strong>solving the previous case</strong> AND meeting the unlock cost in fingerprints. Solve all three rookie cases first, then earn enough fingerprints (currently displayed on the locked card) to purchase the next tier.</p>
+        </div>
+
+        <div class="card">
+            <h3>What does the equipment actually do?</h3>
+            <p>Most items have real gameplay impact. The four analysis tools (Brass Magnifier, UV Flashlight, Evidence Kit, Forensic specialist) unlock four distinct analyses on every collected piece of evidence. The Detective Badge boosts your reward, and the Three-Piece Suit reduces your fine. The Informant tints incriminating evidence in gold to help you spot it. The Rookie and the Tail auto-reveal evidence on the scene. The Driver auto-skips intro cutscenes. Hover over the perks line on each shop card to see what each item does.</p>
+        </div>
+
+        <div class="card">
+            <h3>How does the verdict work?</h3>
+            <p>The judge accepts evidence based on (1) how many incriminating pieces you submit and (2) how few red herrings you mix in. Two or more incriminating pieces with at most one red herring is usually enough to win the rookie tier. Higher tiers require more evidence and tolerate fewer mistakes. The forensic verdict (run via the Forensic specialist) tells you whether each piece is Strong, Weak, or Inconclusive before you submit it.</p>
+        </div>
+
+        <div class="card">
+            <h3>I think I found a bug.</h3>
+            <p>Email us at <a href="mailto:info@luelma.com">info@luelma.com</a> with your iOS version, device model, and a description of what happened. Screenshots or screen recordings are extremely helpful.</p>
+        </div>
+
+        <div class="card">
+            <h3>When are new cases coming?</h3>
+            <p>We're working on additional cases and case packs. Updates ship through the App Store as new versions of the app. Follow the App Store listing or check back periodically.</p>
+        </div>
+
+        <h2>Privacy</h2>
+        <div class="card">
+            <p>Sleuth Star does not collect, transmit, or share any personal data. The full privacy policy is available at <a href="index.html">our privacy policy page</a>.</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2026 Sleuth Star. All rights reserved.</p>
+        <p style="margin-top: 8px;"><a href="index.html">Privacy Policy</a></p>
+    </div>
+</body>
+</html>
