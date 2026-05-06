@@ -77,10 +77,27 @@ detective,mystery,crime,noir,evidence,investigation,sleuth,case,puzzle,solve,who
 
 ---
 
-## What's New (4000 char max — for v1.0 launch)
+## What's New (4000 char max — for v1.1 release)
 
 ```
-Welcome to Sleuth Star, version 1.0.
+Time Attack — race the leaderboard.
+
+Every case now tracks how long it takes you to crack it. Solve the case and your time goes straight to the Game Center leaderboard for that case. Compare against friends or the world.
+
+NEW IN 1.1
+• Game Center leaderboards — one per case, six in total
+• Run timer on every case, visible while you investigate
+• "Time Attack" button on the office desk to view leaderboards
+• Wardrobe tab now shows your detective wearing the gear you own
+• Bug fixes and polish
+
+Thanks for playing.
+```
+
+### Previous versions
+
+```
+v1.0 — Welcome to Sleuth Star, version 1.0.
 
 Every shadow has a seam. Open the Office, pick your case, and start solving.
 
@@ -90,8 +107,6 @@ LAUNCH FEATURES
 • 4 analysis tools, 17 shop items, 8-rank career ladder
 • Multi-phase verdict reveal — watch the judge react to each piece you submit
 • Plays fully offline. No ads, no tracking, no accounts.
-
-Thanks for playing.
 ```
 
 ---

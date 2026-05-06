@@ -1,8 +1,8 @@
 import Foundation
 
 struct ForceUpdateChecker {
-    /// App Store numeric ID — fill in once Apple assigns it (visible in App Store Connect after first build is approved).
-    static let appStoreID = "0000000000"
+    /// App Store numeric ID — visible in App Store Connect / `apps.apple.com/app/id<ID>`.
+    static let appStoreID = "6766141307"
 
     /// Public Gist URL. The app fetches this on launch; bump `minimum_version` in the gist to force users onto a newer build.
     /// Edit with: `gh gist edit 03852fac887d8355a056ae968cf30709`
