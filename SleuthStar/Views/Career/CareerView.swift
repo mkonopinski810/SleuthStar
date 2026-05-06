@@ -124,22 +124,13 @@ struct CareerView: View {
                         .foregroundStyle(next.tintColor)
                 }
 
-                HStack(spacing: 12) {
-                    requirementBlock(
-                        icon: "checkmark.seal.fill",
-                        label: "Cases Solved",
-                        current: game.profile.solvedCaseIds.count,
-                        required: next.solvedRequired,
-                        color: Theme.leafGreen
-                    )
-                    requirementBlock(
-                        icon: "fingerprint",
-                        label: "Lifetime Earned",
-                        current: game.profile.lifetimeFingerprints,
-                        required: next.lifetimeRequired,
-                        color: Theme.gold
-                    )
-                }
+                requirementBlock(
+                    icon: "checkmark.seal.fill",
+                    label: "Cases Solved",
+                    current: game.profile.solvedCaseIds.count,
+                    required: next.solvedRequired,
+                    color: Theme.leafGreen
+                )
 
                 if let perk = next.perk {
                     HStack(spacing: 8) {
@@ -267,7 +258,7 @@ private struct RankRow: View {
                             .clipShape(Capsule())
                     }
                 }
-                Text("\(rank.solvedRequired) solved · \(rank.lifetimeRequired.formattedFingerprints) lifetime")
+                Text("\(rank.solvedRequired) case\(rank.solvedRequired == 1 ? "" : "s") solved")
                     .font(.system(size: 10, weight: .semibold, design: .rounded))
                     .foregroundStyle(Theme.textMuted)
             }

@@ -49,10 +49,9 @@ final class GameStateManager: ObservableObject {
 
     func currentRank() -> CareerRank {
         let solved = profile.solvedCaseIds.count
-        let lifetime = profile.lifetimeFingerprints
         var best: CareerRank = .rookie
         for rank in CareerRank.allCases {
-            if solved >= rank.solvedRequired && lifetime >= rank.lifetimeRequired {
+            if solved >= rank.solvedRequired {
                 best = rank
             } else {
                 break
@@ -65,23 +64,15 @@ final class GameStateManager: ObservableObject {
         currentRank().next
     }
 
-    /// Returns 0..<1 normalized progress to the next rank, weighted across both axes.
+    /// Returns 0..<1 normalized progress to the next rank, based on cases solved.
     func progressToNextRank() -> Double {
         guard let next = nextRank() else { return 1.0 }
         let cur = currentRank()
         let solved = profile.solvedCaseIds.count
-        let lifetime = profile.lifetimeFingerprints
 
         let solvedSpan = max(1, next.solvedRequired - cur.solvedRequired)
         let solvedDone = max(0, solved - cur.solvedRequired)
-        let solvedFrac = min(1.0, Double(solvedDone) / Double(solvedSpan))
-
-        let fpSpan = max(1, next.lifetimeRequired - cur.lifetimeRequired)
-        let fpDone = max(0, lifetime - cur.lifetimeRequired)
-        let fpFrac = min(1.0, Double(fpDone) / Double(fpSpan))
-
-        // Weight evenly across both axes
-        return (solvedFrac + fpFrac) / 2.0
+        return min(1.0, Double(solvedDone) / Double(solvedSpan))
     }
 
     // MARK: - Equipment-driven multipliers (stack)

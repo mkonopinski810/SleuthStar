@@ -74,19 +74,11 @@ struct CareerCard: View {
     private var progressDetail: String {
         guard let next else { return "" }
         let solved = game.profile.solvedCaseIds.count
-        let lifetime = game.profile.lifetimeFingerprints
         let solvedNeed = max(0, next.solvedRequired - solved)
-        let fpNeed = max(0, next.lifetimeRequired - lifetime)
-        if solvedNeed == 0 && fpNeed == 0 {
+        if solvedNeed == 0 {
             return "Promotion ready"
         }
-        if solvedNeed > 0 && fpNeed > 0 {
-            return "\(solvedNeed) cases · \(fpNeed.formattedFingerprints) fp to go"
-        }
-        if solvedNeed > 0 {
-            return "\(solvedNeed) more case\(solvedNeed == 1 ? "" : "s") to go"
-        }
-        return "\(fpNeed.formattedFingerprints) fp to go"
+        return "\(solvedNeed) more case\(solvedNeed == 1 ? "" : "s") to go"
     }
 }
 

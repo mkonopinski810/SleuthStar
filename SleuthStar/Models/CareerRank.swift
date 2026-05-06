@@ -77,20 +77,6 @@ enum CareerRank: Int, CaseIterable, Codable, Hashable {
         }
     }
 
-    /// Lifetime fingerprints earned required to reach this rank
-    var lifetimeRequired: Int {
-        switch self {
-        case .rookie: return 0
-        case .patrolman: return 300
-        case .detective: return 1200
-        case .seniorDetective: return 3000
-        case .inspector: return 7000
-        case .lieutenant: return 14000
-        case .captain: return 25000
-        case .starSleuth: return 50000
-        }
-    }
-
     var perk: String? {
         switch self {
         case .rookie: return nil
