@@ -77,10 +77,32 @@ detective,mystery,crime,noir,evidence,investigation,sleuth,case,puzzle,solve,who
 
 ---
 
-## What's New (4000 char max — for v1.1 release)
+## What's New (4000 char max — for v1.2 release)
 
 ```
-Time Attack — race the leaderboard.
+The roster just tripled. The bench just got sharper.
+
+Nineteen new cases bring the lineup to twenty-five — from a pre-dawn bakery break-in to a senator's daughter dead at sea. A 1571 folio, a counterfeit Krug, a championship-ring vault. Each case still hand-built, evidence by evidence, judge line by judge line.
+
+The bench has new patience for chaff: submit no more than three exhibits per case, and choose well. Promotions now ride on cases solved — fingerprints don't buy you rank, and Star Sleuth waits at 100% completion.
+
+NEW IN 1.2
+• 19 new cases (10 rookie, 4 detective, 3 veteran, 2 master)
+• Star Sleuth top rank now reachable at full completion
+• 1–3 exhibit cap on submissions — no more dump-and-pray
+• Verdict review advances at your tempo (tap through each exhibit)
+• Tell a Friend / Challenge a Friend share — beat your time
+• Career progression now purely skill-based
+• Game Center leaderboards on every case
+• Polish and small fixes
+
+Thanks for playing.
+```
+
+### Previous versions
+
+```
+v1.1 — Time Attack — race the leaderboard.
 
 Every case now tracks how long it takes you to crack it. Solve the case and your time goes straight to the Game Center leaderboard for that case. Compare against friends or the world.
 
@@ -90,11 +112,7 @@ NEW IN 1.1
 • "Time Attack" button on the office desk to view leaderboards
 • Wardrobe tab now shows your detective wearing the gear you own
 • Bug fixes and polish
-
-Thanks for playing.
 ```
-
-### Previous versions
 
 ```
 v1.0 — Welcome to Sleuth Star, version 1.0.
