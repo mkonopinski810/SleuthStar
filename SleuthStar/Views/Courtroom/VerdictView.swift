@@ -33,7 +33,9 @@ struct VerdictView: View {
                     if reviewIndex < submitted.count {
                         ReviewExhibitView(
                             evidence: submitted[reviewIndex],
-                            indexLabel: "Exhibit \(reviewIndex + 1) of \(submitted.count)"
+                            indexLabel: "Exhibit \(reviewIndex + 1) of \(submitted.count)",
+                            isLast: reviewIndex + 1 == submitted.count,
+                            onNext: { advanceReview() }
                         )
                         .id(submitted[reviewIndex].id)
                         .transition(.move(edge: .trailing).combined(with: .opacity))
@@ -112,9 +114,6 @@ struct VerdictView: View {
                 phase = .review
             }
             Haptics.tap()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.6) {
-                advanceReview()
-            }
         }
     }
 
@@ -125,9 +124,6 @@ struct VerdictView: View {
                 reviewIndex += 1
             }
             Haptics.tap()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.6) {
-                advanceReview()
-            }
         } else {
             // Move past review
             withAnimation(.easeInOut(duration: 0.55)) {
@@ -233,6 +229,8 @@ private struct OpeningView: View {
 private struct ReviewExhibitView: View {
     let evidence: Evidence
     let indexLabel: String
+    let isLast: Bool
+    let onNext: () -> Void
 
     @State private var stampShown = false
     @State private var lineRevealed = false
@@ -324,7 +322,21 @@ private struct ReviewExhibitView: View {
             }
             .frame(height: 90)
 
-            Spacer(minLength: 40)
+            Spacer(minLength: 12)
+
+            PrimaryButton(
+                title: isLast ? "Deliver Verdict" : "Next Exhibit",
+                systemImage: isLast ? "checkmark.seal.fill" : "arrow.right",
+                style: .gold
+            ) {
+                Haptics.tap()
+                onNext()
+            }
+            .padding(.horizontal, 32)
+            .padding(.bottom, 28)
+            .opacity(lineRevealed ? 1 : 0)
+            .animation(.easeOut(duration: 0.4), value: lineRevealed)
+            .allowsHitTesting(lineRevealed)
         }
         .onAppear {
             // Stamp first, then line
