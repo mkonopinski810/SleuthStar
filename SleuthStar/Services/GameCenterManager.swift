@@ -16,12 +16,31 @@ final class GameCenterManager: ObservableObject {
     /// You must create a leaderboard in ASC for each entry below before scores will save.
     /// Format: Integer, sort Low → High (lower time wins), display "Elapsed Time (mm:ss.SSS)".
     static let leaderboardIDs: [String: String] = [
-        "case-001-rooftop":     "lb.case_001_rooftop",
-        "case-001b-diner":      "lb.case_001b_diner",
-        "case-001c-greenhouse": "lb.case_001c_greenhouse",
-        "case-002-midnight":    "lb.case_002_midnight",
-        "case-003-diamond":     "lb.case_003_diamond",
-        "case-004-masquerade":  "lb.case_004_masquerade"
+        "case-001-rooftop":      "lb.case_001_rooftop",
+        "case-001b-diner":       "lb.case_001b_diner",
+        "case-001c-greenhouse":  "lb.case_001c_greenhouse",
+        "case-001d-pawnshop":    "lb.case_001d_pawnshop",
+        "case-001e-bakery":      "lb.case_001e_bakery",
+        "case-001f-bookshop":    "lb.case_001f_bookshop",
+        "case-001g-tailor":      "lb.case_001g_tailor",
+        "case-001h-arcade":      "lb.case_001h_arcade",
+        "case-001i-flowershop":  "lb.case_001i_flowershop",
+        "case-001j-laundromat":  "lb.case_001j_laundromat",
+        "case-001k-recordshop":  "lb.case_001k_recordshop",
+        "case-001l-bodega":      "lb.case_001l_bodega",
+        "case-001m-cobbler":     "lb.case_001m_cobbler",
+        "case-002-midnight":     "lb.case_002_midnight",
+        "case-002b-manuscript":  "lb.case_002b_manuscript",
+        "case-002c-backlot":     "lb.case_002c_backlot",
+        "case-002d-mayor":       "lb.case_002d_mayor",
+        "case-002e-champagne":   "lb.case_002e_champagne",
+        "case-003-diamond":      "lb.case_003_diamond",
+        "case-003b-stadium":     "lb.case_003b_stadium",
+        "case-003c-tunnel":      "lb.case_003c_tunnel",
+        "case-003d-auction":     "lb.case_003d_auction",
+        "case-004-masquerade":   "lb.case_004_masquerade",
+        "case-004b-conductor":   "lb.case_004b_conductor",
+        "case-004c-yacht":       "lb.case_004c_yacht"
     ]
 
     static func leaderboardID(for caseId: String) -> String? {

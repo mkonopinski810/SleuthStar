@@ -17,8 +17,17 @@ enum CaseRepository {
         bodegaLottery,
         cobblerGoldLeaf,
         midnightHeist,
+        lostManuscript,
+        backlotBurn,
+        mayorsMistake,
+        champagneSwitch,
         diamondVanish,
-        masquerade
+        stadiumVault,
+        subterraneanHeist,
+        mansionAuction,
+        masquerade,
+        conductorsLastScore,
+        yachtMurder
     ]
 
     static func first() -> CrimeCase { rooftopRobbery }
@@ -1838,6 +1847,594 @@ enum CaseRepository {
         suspectReveal: "The bench finds your suspect — \"The Curator's Friend\" — guilty of grand larceny and forgery."
     )
 
+    // MARK: - Case · The Lost Manuscript (detective, requires Midnight Heist)
+
+    static let lostManuscript = CrimeCase(
+        id: "case-002b-manuscript",
+        title: "The Lost Manuscript",
+        blurb: "Vance Library closed Sunday with a 1573 first folio under glass. Monday's curator opened the case to dust and an empty stand.",
+        location: "Vance Library · Cathedral District",
+        difficulty: .detective,
+        suspect: Suspect(
+            name: "Unknown",
+            alias: "The Scholar",
+            profileSilhouette: "person.fill.questionmark",
+            known: "Visiting fellow. Three months in the reading room. Photographed every page of the folio twice."
+        ),
+        sceneIcon: "books.vertical.circle.fill",
+        sceneTint: [0.18, 0.16, 0.30],
+        evidence: [
+            Evidence(
+                id: "ev-002b-fingerprint",
+                type: .fingerprint,
+                name: "Glass Print",
+                description: "A clean thumbprint on the inside of the display case glass, where the folio had rested.",
+                isIncriminating: true,
+                normalizedX: 0.40,
+                normalizedY: 0.42,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Right thumb, whorl. Pressed firmly — they steadied the case with the same hand that lifted the folio.",
+                    uvFinding: "Trace archival glove powder. They removed a glove briefly to manage the latch.",
+                    labFinding: "Print matches the suspect's signature on the visiting-fellow registry.",
+                    forensicVerdict: .strong,
+                    forensicNote: "A registered fellow's print on the inside of a sealed case. Hard to argue with."
+                ),
+                surfaceIcon: "lock.shield.fill",
+                surfaceLabel: "THE FOLIO DISPLAY CASE",
+                judgeLine: "Inside the locked case, with the folio's velvet impression next to it. Accepted."
+            ),
+            Evidence(
+                id: "ev-002b-note",
+                type: .note,
+                name: "Reading Slip",
+                description: "A reading-room request slip in the suspect's hand, asking to view the folio without supervision.",
+                isIncriminating: true,
+                normalizedX: 0.66,
+                normalizedY: 0.30,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Sharp 4H pencil. Request line crossed out, rewritten with a forged supervisor's initial.",
+                    uvFinding: "The original requester's name was erased — replaced with the Scholar's.",
+                    labFinding: "Forged initials match the Scholar's writing pressure on the registry.",
+                    forensicVerdict: .strong,
+                    forensicNote: "Forgery on a controlled-access document. Premeditation in writing."
+                ),
+                surfaceIcon: "doc.text.fill",
+                surfaceLabel: "THE READING-ROOM DESK",
+                judgeLine: "Forged supervisor's mark, in the suspect's own hand. Accepted."
+            ),
+            Evidence(
+                id: "ev-002b-footprint",
+                type: .footprint,
+                name: "Carpet Print",
+                description: "Faint print in the deep velvet carpet of the rare-room corridor, just outside the case.",
+                isIncriminating: true,
+                normalizedX: 0.28,
+                normalizedY: 0.74,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Size 11 dress shoe, narrow last. Distinctive heel scuff to the right.",
+                    uvFinding: "Carpet fibers cling to the print outline. Recent contact, within hours.",
+                    labFinding: "Sole pattern matches the Scholar's left-behind shoes during the prior visit.",
+                    forensicVerdict: .strong,
+                    forensicNote: "Wrong wing, right hour. The Scholar wasn't supposed to be in the rare corridor."
+                ),
+                surfaceIcon: "shoeprints.fill",
+                surfaceLabel: "THE RARE-ROOM CORRIDOR",
+                judgeLine: "Wrong wing, right shoe. Accepted."
+            ),
+            Evidence(
+                id: "ev-002b-photograph",
+                type: .photograph,
+                name: "CCTV Frame",
+                description: "Library camera still — Sunday at 6:14 PM, the suspect lingering at the rare-room threshold.",
+                isIncriminating: true,
+                normalizedX: 0.54,
+                normalizedY: 0.55,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Subject in dark coat, holding a slim leather satchel. Time stamp consistent with the closing-bell sequence.",
+                    uvFinding: "Time stamp authenticates — frame is genuine and unedited.",
+                    labFinding: "Sunday is a no-fellow day. The Scholar was not supposed to be on premises.",
+                    forensicVerdict: .strong,
+                    forensicNote: "Places them at the threshold of the rare room, on a closed day, fifty minutes before the lockup."
+                ),
+                surfaceIcon: "video.fill",
+                surfaceLabel: "THE RARE-ROOM THRESHOLD",
+                judgeLine: "On a closed Sunday, in the wrong wing. Accepted."
+            ),
+            Evidence(
+                id: "ev-002b-hair",
+                type: .hair,
+                name: "Cataloguer's Hair",
+                description: "A long red strand caught in the case's hinge.",
+                isIncriminating: false,
+                normalizedX: 0.78,
+                normalizedY: 0.50,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "30 cm, natural red. Cuticle intact.",
+                    uvFinding: "No chemical residue.",
+                    labFinding: "DNA matches the senior cataloguer who restocks this case weekly.",
+                    forensicVerdict: .weak,
+                    forensicNote: "The cataloguer touches this case every Friday. Routine contact."
+                ),
+                surfaceIcon: "person.fill",
+                surfaceLabel: "THE CASE HINGE",
+                judgeLine: "The cataloguer's own hair on her own case. Discarded."
+            ),
+            Evidence(
+                id: "ev-002b-receipt",
+                type: .receipt,
+                name: "Taxi Slip",
+                description: "Cab receipt found on the steps outside, dated three days ago.",
+                isIncriminating: false,
+                normalizedX: 0.16,
+                normalizedY: 0.30,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Standard cab printout. $14.20 to a north-side address.",
+                    uvFinding: "No fluorescence.",
+                    labFinding: "Predates the theft. Customer never identified.",
+                    forensicVerdict: .weak,
+                    forensicNote: "Stale by three days. Doesn't speak to Sunday."
+                ),
+                surfaceIcon: "scroll.fill",
+                surfaceLabel: "THE LIBRARY STEPS",
+                judgeLine: "Three-day-old cab fare. Discarded."
+            )
+        ],
+        minIncriminatingToWin: 3,
+        reward: 760,
+        fineOnLoss: 290,
+        unlockCost: 0,
+        requiresCaseId: "case-002-midnight",
+        truth: [
+            "The Scholar arrived in October as a visiting fellow with a forged letter of introduction from a chair who'd retired the year before.",
+            "They photographed the folio twice — once for their own records, once to forge a working copy meant to delay discovery.",
+            "On Sunday they doctored a reading-room slip with a fake supervisor's initial and slipped into the rare wing.",
+            "They lifted the latch with one gloved hand, forgot themselves and pressed the glass with the other, and walked the folio out under their coat.",
+            "The forgery they planted on the stand fooled the curator until Tuesday, when the cataloguer noticed the fly-leaf imprimatur was three millimeters short."
+        ],
+        suspectReveal: "The bench finds your suspect — \"The Scholar\" — guilty of grand larceny and forgery."
+    )
+
+    // MARK: - Case · The Backlot Burn (detective, requires Manuscript)
+
+    static let backlotBurn = CrimeCase(
+        id: "case-002c-backlot",
+        title: "The Backlot Burn",
+        blurb: "Halcyon Studios was prepping the coronation set when a fire broke out in the prop tent. The replica crown burned. The real one — borrowed from a museum — is gone.",
+        location: "Halcyon Studios · Backlot 4",
+        difficulty: .detective,
+        suspect: Suspect(
+            name: "Unknown",
+            alias: "The Stand-In",
+            profileSilhouette: "person.fill.questionmark",
+            known: "Worked the coronation scene as a body double. Left set early Friday with a complaint about the wig."
+        ),
+        sceneIcon: "flame.fill",
+        sceneTint: [0.42, 0.16, 0.10],
+        evidence: [
+            Evidence(
+                id: "ev-002c-fingerprint",
+                type: .fingerprint,
+                name: "Lock Print",
+                description: "A thumbprint on the prop case's combination wheel, partially smeared by smoke residue.",
+                isIncriminating: true,
+                normalizedX: 0.40,
+                normalizedY: 0.46,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Right thumb, loop pattern. Pressed before the smoke arrived — laid down dry.",
+                    uvFinding: "Trace gold-leaf flake on the print. The same gilding as the missing crown.",
+                    labFinding: "Print matches the Stand-In's costume-fitting card on file.",
+                    forensicVerdict: .strong,
+                    forensicNote: "Touched the lock with the missing crown's gold on their thumb. Direct."
+                ),
+                surfaceIcon: "lock.fill",
+                surfaceLabel: "THE PROP CASE LOCK",
+                judgeLine: "The crown's own gold on the lock's tumbler. Accepted."
+            ),
+            Evidence(
+                id: "ev-002c-weapon",
+                type: .weapon,
+                name: "Brass Lighter",
+                description: "A scratched brass Zippo found half-buried in the soot near the tent's rear flap.",
+                isIncriminating: true,
+                normalizedX: 0.66,
+                normalizedY: 0.74,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Distinctive engraving: a stylized H. Wick wear is recent.",
+                    uvFinding: "Lighter fluid residue on the casing — used multiple times within the hour.",
+                    labFinding: "Engraving matches a custom shop on Vine St. that the Stand-In commissioned in 2024.",
+                    forensicVerdict: .strong,
+                    forensicNote: "The tool of the fire, with a custom engraving traceable to the suspect."
+                ),
+                surfaceIcon: "flame.fill",
+                surfaceLabel: "THE TENT'S REAR FLAP",
+                judgeLine: "Their lighter, their initial, their fire. Accepted."
+            ),
+            Evidence(
+                id: "ev-002c-photograph",
+                type: .photograph,
+                name: "Costume Polaroid",
+                description: "Polaroid found in the suspect's locker — them wearing the real crown for a fitting two days before the fire.",
+                isIncriminating: true,
+                normalizedX: 0.54,
+                normalizedY: 0.30,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Real crown, not the replica — the inset emerald is hand-cut, not glass.",
+                    uvFinding: "Time stamp authenticates Wednesday afternoon.",
+                    labFinding: "Studio rules forbid private photos with borrowed items. The Stand-In broke protocol on purpose.",
+                    forensicVerdict: .strong,
+                    forensicNote: "Premeditation: they posed with what they planned to take."
+                ),
+                surfaceIcon: "camera.fill",
+                surfaceLabel: "THE SUSPECT'S LOCKER",
+                judgeLine: "Posed with the prize, two days before the fire. Accepted."
+            ),
+            Evidence(
+                id: "ev-002c-footprint",
+                type: .footprint,
+                name: "Soot Trail",
+                description: "A boot print in soot leading from the burn site toward the studio's east-gate alley.",
+                isIncriminating: true,
+                normalizedX: 0.22,
+                normalizedY: 0.78,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Size 10 work boot. Caterpillar logo on the heel.",
+                    uvFinding: "Ash density on the print indicates the wearer left within minutes of the fire's peak.",
+                    labFinding: "Tread matches the suspect's wardrobe inventory boot.",
+                    forensicVerdict: .strong,
+                    forensicNote: "Walked out the back during peak smoke. Studio surveillance was looking the other way."
+                ),
+                surfaceIcon: "shoeprints.fill",
+                surfaceLabel: "THE EAST-GATE ALLEY",
+                judgeLine: "Their boot, their soot, their exit. Accepted."
+            ),
+            Evidence(
+                id: "ev-002c-receipt",
+                type: .receipt,
+                name: "Gas Station Slip",
+                description: "A receipt for an unrelated $12 gas purchase, found in the wardrobe trailer.",
+                isIncriminating: false,
+                normalizedX: 0.78,
+                normalizedY: 0.40,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Standard pump receipt. Ordinary fuel grade, paid by card.",
+                    uvFinding: "No fluorescence.",
+                    labFinding: "Card belongs to a costume assistant. Filed on Wednesday morning.",
+                    forensicVerdict: .weak,
+                    forensicNote: "An assistant's gas. Not material."
+                ),
+                surfaceIcon: "scroll.fill",
+                surfaceLabel: "THE WARDROBE TRAILER",
+                judgeLine: "An assistant's commute. Discarded."
+            ),
+            Evidence(
+                id: "ev-002c-hair",
+                type: .hair,
+                name: "Wig Hair",
+                description: "Long synthetic strands snagged on the costume rack in the burned tent.",
+                isIncriminating: false,
+                normalizedX: 0.34,
+                normalizedY: 0.22,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Synthetic fiber, not biological. Period wig, dyed brunette.",
+                    uvFinding: "Heavy hairspray residue.",
+                    labFinding: "Wig belongs to the lead actress's coronation costume — fitted last week.",
+                    forensicVerdict: .weak,
+                    forensicNote: "Routine costume contact. Doesn't speak to the theft."
+                ),
+                surfaceIcon: "scribble.variable",
+                surfaceLabel: "THE COSTUME RACK",
+                judgeLine: "The leading lady's wig hair on her own rack. Discarded."
+            )
+        ],
+        minIncriminatingToWin: 3,
+        reward: 800,
+        fineOnLoss: 310,
+        unlockCost: 0,
+        requiresCaseId: "case-002b-manuscript",
+        truth: [
+            "The Stand-In had been passed over for the speaking part. The pay cut was livable; the snub wasn't.",
+            "They booked a Wednesday fitting — strict no-photos — and walked out with a Polaroid of themselves crowned.",
+            "Friday morning they 'left set early,' looped back to the prop tent during lunch, and used their custom Zippo to start the fire.",
+            "They lifted the real crown while smoke covered the camera angles, replaced it with the replica that was supposed to burn, and walked out the east gate.",
+            "By the time the fire crew arrived, the prop case held the destroyed copy. The real crown was already in their trunk."
+        ],
+        suspectReveal: "The bench finds your suspect — \"The Stand-In\" — guilty of grand larceny and arson."
+    )
+
+    // MARK: - Case · The Mayor's Mistake (detective, requires Backlot)
+
+    static let mayorsMistake = CrimeCase(
+        id: "case-002d-mayor",
+        title: "The Mayor's Mistake",
+        blurb: "City Hall, Monday morning. The mayor's private safe is open, the blackmail file is gone, and the only person with a reason to want it never had the combination.",
+        location: "City Hall · Mayor's Office Suite",
+        difficulty: .detective,
+        suspect: Suspect(
+            name: "Unknown",
+            alias: "The Aide",
+            profileSilhouette: "person.fill.questionmark",
+            known: "Eight months on staff. Promoted twice. Asked twice last month to be left alone in the office."
+        ),
+        sceneIcon: "building.columns.fill",
+        sceneTint: [0.20, 0.20, 0.36],
+        evidence: [
+            Evidence(
+                id: "ev-002d-fingerprint",
+                type: .fingerprint,
+                name: "Safe Dial Print",
+                description: "Right thumbprint pressed on the brass dial of the mayor's private floor safe.",
+                isIncriminating: true,
+                normalizedX: 0.40,
+                normalizedY: 0.50,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Whorl pattern, sharp ridges. Fresh.",
+                    uvFinding: "Hand-cream residue — the suspect had recently used the staff bathroom.",
+                    labFinding: "Print matches the Aide's onboarding fingerprint card.",
+                    forensicVerdict: .strong,
+                    forensicNote: "The Aide doesn't have safe access. This print shouldn't exist."
+                ),
+                surfaceIcon: "lock.fill",
+                surfaceLabel: "THE FLOOR SAFE",
+                judgeLine: "Their thumb on a dial they're not cleared for. Accepted."
+            ),
+            Evidence(
+                id: "ev-002d-note",
+                type: .note,
+                name: "Carbon Memo",
+                description: "A carbon-paper memo found in the suspect's bottom drawer, listing the safe's contents by date.",
+                isIncriminating: true,
+                normalizedX: 0.66,
+                normalizedY: 0.34,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "The Aide's clean handwriting. Names and dates pulled directly from the missing file.",
+                    uvFinding: "The carbon impression underneath shows a draft — they wrote this before the file was missing.",
+                    labFinding: "Paper stock matches the Aide's office supply order.",
+                    forensicVerdict: .strong,
+                    forensicNote: "They knew the file's contents before the theft. Inside knowledge."
+                ),
+                surfaceIcon: "doc.text.fill",
+                surfaceLabel: "THE AIDE'S DESK DRAWER",
+                judgeLine: "The file's contents, in their own hand, before the file was gone. Accepted."
+            ),
+            Evidence(
+                id: "ev-002d-photograph",
+                type: .photograph,
+                name: "Hallway Camera",
+                description: "Black-and-white still, Sunday 11:42 PM, the suspect in the executive corridor.",
+                isIncriminating: true,
+                normalizedX: 0.54,
+                normalizedY: 0.62,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Subject in shirt-sleeves, no jacket, carrying a folder. Sunday evening.",
+                    uvFinding: "Frame is unedited — time stamp matches the building's logbook discrepancy.",
+                    labFinding: "Sunday is keycard-only access. The Aide's card was used at 11:39.",
+                    forensicVerdict: .strong,
+                    forensicNote: "Ten minutes inside the executive corridor on a Sunday. Not their floor."
+                ),
+                surfaceIcon: "video.fill",
+                surfaceLabel: "THE EXECUTIVE CORRIDOR",
+                judgeLine: "Sunday evening, wrong floor, with their keycard. Accepted."
+            ),
+            Evidence(
+                id: "ev-002d-footprint",
+                type: .footprint,
+                name: "Lint Print",
+                description: "Sweater-lint partial print on the office's polished marble floor, near the safe.",
+                isIncriminating: true,
+                normalizedX: 0.22,
+                normalizedY: 0.78,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Size 9 dress shoe. Smooth leather. The lint pattern is recent.",
+                    uvFinding: "Lint fluoresces blue — wool blend.",
+                    labFinding: "Lint comes from a navy cardigan owned by the Aide and worn Sunday.",
+                    forensicVerdict: .strong,
+                    forensicNote: "Their sweater shed onto their footprint. Distinctive. Provable."
+                ),
+                surfaceIcon: "shoeprints.fill",
+                surfaceLabel: "THE OFFICE MARBLE",
+                judgeLine: "Their cardigan, their footprint. Accepted."
+            ),
+            Evidence(
+                id: "ev-002d-hair",
+                type: .hair,
+                name: "Receptionist's Hair",
+                description: "Long blonde strand on the visitor chair near the desk.",
+                isIncriminating: false,
+                normalizedX: 0.78,
+                normalizedY: 0.42,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "30 cm, blonde, dyed.",
+                    uvFinding: "Heavy bleach residue.",
+                    labFinding: "Matches the mayor's secretary, who sat in this chair on Friday.",
+                    forensicVerdict: .weak,
+                    forensicNote: "The secretary's hair on the secretary's chair. Routine."
+                ),
+                surfaceIcon: "person.fill",
+                surfaceLabel: "THE VISITOR CHAIR",
+                judgeLine: "Routine staff contact. Discarded."
+            ),
+            Evidence(
+                id: "ev-002d-receipt",
+                type: .receipt,
+                name: "Lunch Order",
+                description: "A restaurant receipt for a Friday lunch — the mayor and three council members.",
+                isIncriminating: false,
+                normalizedX: 0.16,
+                normalizedY: 0.30,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Standard restaurant slip. $182. Paid on the city card.",
+                    uvFinding: "Nothing hidden.",
+                    labFinding: "Routine business expense. Filed by the office.",
+                    forensicVerdict: .weak,
+                    forensicNote: "Friday's lunch. Wrong day."
+                ),
+                surfaceIcon: "scroll.fill",
+                surfaceLabel: "THE OUTBOX",
+                judgeLine: "Friday's lunch. Sunday's theft. Discarded."
+            )
+        ],
+        minIncriminatingToWin: 3,
+        reward: 880,
+        fineOnLoss: 340,
+        unlockCost: 0,
+        requiresCaseId: "case-002c-backlot",
+        truth: [
+            "The Aide had spent eight months learning the rhythms of the office — the keycard logs, the cleaning crew's hours, the Sunday-night gap.",
+            "They drafted a memo of the safe's contents weeks before the theft, working from notes overheard during late-night sessions.",
+            "Sunday at 11:42 PM they used their own card to enter the executive corridor — a clearance they didn't have, but one the system never flagged.",
+            "They worked the dial with bare hands, took the file, and walked back to their own office to copy it before sunrise.",
+            "They thought they'd put the original back. They forgot which drawer."
+        ],
+        suspectReveal: "The bench finds your suspect — \"The Aide\" — guilty of theft of municipal records."
+    )
+
+    // MARK: - Case · The Champagne Switch (detective, requires Mayor)
+
+    static let champagneSwitch = CrimeCase(
+        id: "case-002e-champagne",
+        title: "The Champagne Switch",
+        blurb: "The Carlton's wine cellar holds twelve bottles of 1959 Krug for the New Year toast. Last week's audit: twelve real. Tonight's pop: counterfeit, all the way down.",
+        location: "The Carlton Hotel · Wine Cellar",
+        difficulty: .detective,
+        suspect: Suspect(
+            name: "Unknown",
+            alias: "The Sommelier",
+            profileSilhouette: "person.fill.questionmark",
+            known: "Twelve years on staff. Holds the only key to the rare-wine cage besides the GM's."
+        ),
+        sceneIcon: "wineglass.fill",
+        sceneTint: [0.36, 0.18, 0.12],
+        evidence: [
+            Evidence(
+                id: "ev-002e-fingerprint",
+                type: .fingerprint,
+                name: "Foil Print",
+                description: "A thumbprint pressed into the foil neck of one of the counterfeit bottles.",
+                isIncriminating: true,
+                normalizedX: 0.40,
+                normalizedY: 0.42,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Right thumb. Whorl pattern. Bare hand — they didn't gloves to handle this bottle.",
+                    uvFinding: "Trace 1959-vintage cork dust. They opened a real one to remember the technique.",
+                    labFinding: "Print matches the Sommelier's hire-day card.",
+                    forensicVerdict: .strong,
+                    forensicNote: "Bare-handed on a counterfeit they're not supposed to know about."
+                ),
+                surfaceIcon: "wineglass.fill",
+                surfaceLabel: "THE FOIL NECK",
+                judgeLine: "Their thumb on the counterfeit. Accepted."
+            ),
+            Evidence(
+                id: "ev-002e-note",
+                type: .note,
+                name: "Inventory Slip",
+                description: "Last month's audit slip — every Krug bottle accounted for, signed in the Sommelier's hand.",
+                isIncriminating: true,
+                normalizedX: 0.66,
+                normalizedY: 0.30,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Twelve checks, twelve bottle numbers. The signature is firm.",
+                    uvFinding: "One bottle number is overwritten — the original digit erased and rewritten one off.",
+                    labFinding: "The overwritten number matches the bottle that's now most clearly counterfeit by chemical assay.",
+                    forensicVerdict: .strong,
+                    forensicNote: "They marked the bottle they swapped first, in their own audit, weeks ago."
+                ),
+                surfaceIcon: "doc.text.fill",
+                surfaceLabel: "THE AUDIT BINDER",
+                judgeLine: "They marked the swap, in their own hand, weeks ago. Accepted."
+            ),
+            Evidence(
+                id: "ev-002e-photograph",
+                type: .photograph,
+                name: "Cellar Camera",
+                description: "Cellar camera frame, Wednesday 2:14 AM, the suspect in the rare-wine cage.",
+                isIncriminating: true,
+                normalizedX: 0.54,
+                normalizedY: 0.62,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Subject is alone, holding two bottles — one with the original 1959 label, one with the counterfeit foil.",
+                    uvFinding: "Time stamp authenticates. Frame is unedited.",
+                    labFinding: "The Sommelier's after-hours access was logged for inventory — but the frame shows them swapping bottles, not counting.",
+                    forensicVerdict: .strong,
+                    forensicNote: "They photographed themselves in the act, by being on a camera they should have known about."
+                ),
+                surfaceIcon: "video.fill",
+                surfaceLabel: "THE RARE-WINE CAGE",
+                judgeLine: "Two bottles, one swap, on camera. Accepted."
+            ),
+            Evidence(
+                id: "ev-002e-footprint",
+                type: .footprint,
+                name: "Cellar Dust",
+                description: "Print in the chalky cellar floor dust, leading from the cage to the loading dock.",
+                isIncriminating: true,
+                normalizedX: 0.22,
+                normalizedY: 0.78,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Size 9 dress shoe. Polished — wine-cellar staff don't usually wear these.",
+                    uvFinding: "Dust profile is consistent with a 2 AM transit, not lunch service.",
+                    labFinding: "The loading dock door is supposed to be sealed after midnight.",
+                    forensicVerdict: .strong,
+                    forensicNote: "They moved bottles out the back, dressed for service, in the small hours."
+                ),
+                surfaceIcon: "shoeprints.fill",
+                surfaceLabel: "THE LOADING DOCK PATH",
+                judgeLine: "After-hours steps to a sealed door. Accepted."
+            ),
+            Evidence(
+                id: "ev-002e-hair",
+                type: .hair,
+                name: "Tasting Hair",
+                description: "Short gray hair caught in the rim of a tasting glass left on the cage's table.",
+                isIncriminating: false,
+                normalizedX: 0.78,
+                normalizedY: 0.40,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "8 cm, gray, fine.",
+                    uvFinding: "No chemical residue.",
+                    labFinding: "Matches the GM, who tasted from this glass during last week's audit.",
+                    forensicVerdict: .weak,
+                    forensicNote: "Routine tasting contact. Not material to the swap."
+                ),
+                surfaceIcon: "wineglass.fill",
+                surfaceLabel: "THE TASTING GLASS",
+                judgeLine: "The GM's hair on the GM's glass. Discarded."
+            ),
+            Evidence(
+                id: "ev-002e-receipt",
+                type: .receipt,
+                name: "Chef's Order",
+                description: "A receipt for the kitchen's weekly mise-en-place pickup. Cheese, oil, herbs.",
+                isIncriminating: false,
+                normalizedX: 0.16,
+                normalizedY: 0.30,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Standard purveyor slip. $640.",
+                    uvFinding: "Nothing hidden.",
+                    labFinding: "Routine kitchen order. Filed Tuesday.",
+                    forensicVerdict: .weak,
+                    forensicNote: "Kitchen supplies. Not the cellar."
+                ),
+                surfaceIcon: "scroll.fill",
+                surfaceLabel: "THE STAFF CORK BOARD",
+                judgeLine: "The kitchen's groceries. Wrong department. Discarded."
+            )
+        ],
+        minIncriminatingToWin: 3,
+        reward: 960,
+        fineOnLoss: 380,
+        unlockCost: 0,
+        requiresCaseId: "case-002d-mayor",
+        truth: [
+            "The Sommelier had a buyer in Hong Kong who'd pay a five-figure premium for a real bottle of 1959 Krug.",
+            "They worked the swap over six months — selling one real bottle every six weeks, replacing it with a counterfeit produced in a Belmont basement.",
+            "Last month's audit was their cover: every bottle 'accounted for,' the count clean, the inventory signed.",
+            "Wednesday at 2 AM they finished the twelfth swap — bare-handed, careless after a year's success — and walked the last real bottle out the loading dock.",
+            "They forgot the cellar camera had been moved a year ago, after a different theft. The frame caught them holding both bottles."
+        ],
+        suspectReveal: "The bench finds your suspect — \"The Sommelier\" — guilty of grand larceny and forgery."
+    )
+
     static let diamondVanish = CrimeCase(
         id: "case-003-diamond",
         title: "The Diamond Vanish",
@@ -1991,7 +2588,7 @@ enum CaseRepository {
         reward: 1450,
         fineOnLoss: 520,
         unlockCost: 2200,
-        requiresCaseId: "case-002-midnight",
+        requiresCaseId: "case-002e-champagne",
         truth: [
             "The Static Ghost was Larry, the night guard — and he had help. He'd been planning for six months.",
             "He cloned his own badge with help from a print-cloning shop, then handed the clone (and the vault code) to an outside partner.",
@@ -2000,6 +2597,504 @@ enum CaseRepository {
             "His partner walked in with the cloned card, opened the vault with the keypad code, and took five diamonds — four of which Larry had quietly delisted from this audit cycle. The vault was empty by 3:18 AM."
         ],
         suspectReveal: "The bench finds your suspect — \"The Static Ghost\" (Larry Kovacs) — guilty of conspiracy to commit grand theft."
+    )
+
+    // MARK: - Case · The Stadium Vault (veteran, requires Diamond)
+
+    static let stadiumVault = CrimeCase(
+        id: "case-003b-stadium",
+        title: "The Stadium Vault",
+        blurb: "Iron Stadium's locker-room vault held three sets of championship rings overnight before Saturday's reveal. By 6 AM Saturday: the vault was open, the rings were gone, and the door wasn't forced.",
+        location: "Iron Stadium · Sub-Concourse Vault",
+        difficulty: .veteran,
+        suspect: Suspect(
+            name: "Unknown",
+            alias: "The Equipment Manager",
+            profileSilhouette: "person.fill.questionmark",
+            known: "Twenty-two years on staff. Holds the keycard. Was on the schedule for the overnight shift but punched out at midnight."
+        ),
+        sceneIcon: "trophy.fill",
+        sceneTint: [0.30, 0.20, 0.10],
+        evidence: [
+            Evidence(
+                id: "ev-003b-fingerprint",
+                type: .fingerprint,
+                name: "Vault Dial Print",
+                description: "A clean thumbprint pressed into the keypad's brass cover plate.",
+                isIncriminating: true,
+                normalizedX: 0.40,
+                normalizedY: 0.42,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Right thumb, whorl. Bare-handed contact, recent.",
+                    uvFinding: "Trace turf-clay residue. Same clay as the visiting-team tunnel.",
+                    labFinding: "Print matches the Equipment Manager's hire-day card.",
+                    forensicVerdict: .strong,
+                    forensicNote: "Bare hand on the dial, with field clay still on the thumb."
+                ),
+                surfaceIcon: "lock.fill",
+                surfaceLabel: "THE VAULT KEYPAD",
+                judgeLine: "Their thumb, with field dirt still on it. Accepted."
+            ),
+            Evidence(
+                id: "ev-003b-note",
+                type: .note,
+                name: "Schedule Slip",
+                description: "A handwritten note in the suspect's office, listing the rings' overnight transfer schedule by hour.",
+                isIncriminating: true,
+                normalizedX: 0.66,
+                normalizedY: 0.34,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Pencil, neat hand. Times match the rings' actual transit log to the minute.",
+                    uvFinding: "An erased fourth time slot — 1:47 AM — that doesn't appear in the official log.",
+                    labFinding: "Handwriting matches the suspect's standard inventory script on file.",
+                    forensicVerdict: .strong,
+                    forensicNote: "They documented a window the official log doesn't have. Insider planning."
+                ),
+                surfaceIcon: "doc.text.fill",
+                surfaceLabel: "THE OFFICE DESK",
+                judgeLine: "Their schedule, their secret window, their hand. Accepted."
+            ),
+            Evidence(
+                id: "ev-003b-photograph",
+                type: .photograph,
+                name: "Keycard Log Print",
+                description: "A printed badge-access log showing the suspect's card used at 1:46 AM — minutes after they punched out.",
+                isIncriminating: true,
+                normalizedX: 0.54,
+                normalizedY: 0.55,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Card read at the sub-concourse door. ID number matches the suspect's badge.",
+                    uvFinding: "Print is from the security computer's thermal printer.",
+                    labFinding: "The badge swipe occurred 102 minutes after the suspect's punch-out — they came back.",
+                    forensicVerdict: .strong,
+                    forensicNote: "Their badge, after their shift, at the vault door."
+                ),
+                surfaceIcon: "doc.text.fill",
+                surfaceLabel: "THE SECURITY COMPUTER",
+                judgeLine: "Their badge, after they'd left. Accepted."
+            ),
+            Evidence(
+                id: "ev-003b-footprint",
+                type: .footprint,
+                name: "Tunnel Clay",
+                description: "A footprint in the dried turf-clay residue near the visiting-team tunnel mouth.",
+                isIncriminating: true,
+                normalizedX: 0.22,
+                normalizedY: 0.74,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Size 11 work boot. Distinctive Iron Stadium staff issue, with a chipped right heel.",
+                    uvFinding: "Clay deposit dates to within four hours.",
+                    labFinding: "The chipped-heel boot is registered to the suspect in the staff equipment log.",
+                    forensicVerdict: .strong,
+                    forensicNote: "Their boot, with their chip, in the right wing at the right hour."
+                ),
+                surfaceIcon: "shoeprints.fill",
+                surfaceLabel: "THE VISITORS' TUNNEL",
+                judgeLine: "Their boot's distinctive chip. Accepted."
+            ),
+            Evidence(
+                id: "ev-003b-weapon",
+                type: .weapon,
+                name: "Bolt Cutter",
+                description: "Heavy-duty bolt cutters wedged behind a laundry hamper in the equipment room.",
+                isIncriminating: true,
+                normalizedX: 0.78,
+                normalizedY: 0.58,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Brass nick on the blade — the same brass as the vault's ring-display chain.",
+                    uvFinding: "Trace ring-display velvet caught in the jaw.",
+                    labFinding: "Tool is part of the equipment manager's locker. Inventory ID matches.",
+                    forensicVerdict: .strong,
+                    forensicNote: "The cutter, with the chain's brass and the display's velvet on it."
+                ),
+                surfaceIcon: "wrench.fill",
+                surfaceLabel: "BEHIND THE LAUNDRY HAMPER",
+                judgeLine: "Their cutter, with the vault's brass on the blade. Accepted."
+            ),
+            Evidence(
+                id: "ev-003b-hair",
+                type: .hair,
+                name: "Locker Hair",
+                description: "Short hair on a player's nameplate jersey hanging in the locker room.",
+                isIncriminating: false,
+                normalizedX: 0.34,
+                normalizedY: 0.22,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "5 cm, dark, straight.",
+                    uvFinding: "Sweat residue.",
+                    labFinding: "Matches the player whose jersey it is. Routine.",
+                    forensicVerdict: .weak,
+                    forensicNote: "A player's hair on his own jersey."
+                ),
+                surfaceIcon: "tshirt.fill",
+                surfaceLabel: "THE LOCKER ROOM",
+                judgeLine: "His own jersey. Discarded."
+            ),
+            Evidence(
+                id: "ev-003b-receipt",
+                type: .receipt,
+                name: "Parking Stub",
+                description: "A parking-lot stub from the south structure, dated three nights before.",
+                isIncriminating: false,
+                normalizedX: 0.14,
+                normalizedY: 0.30,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Standard automated stub. Stamped Wednesday 7 PM.",
+                    uvFinding: "Nothing hidden.",
+                    labFinding: "Visiting reporter's stub from the press conference. Filed.",
+                    forensicVerdict: .weak,
+                    forensicNote: "Reporter's parking. Wrong night."
+                ),
+                surfaceIcon: "scroll.fill",
+                surfaceLabel: "ON THE FLOOR BY THE DOOR",
+                judgeLine: "A reporter's parking. Discarded."
+            )
+        ],
+        minIncriminatingToWin: 4,
+        reward: 1600,
+        fineOnLoss: 600,
+        unlockCost: 0,
+        requiresCaseId: "case-003-diamond",
+        truth: [
+            "The Equipment Manager had been at Iron Stadium since the building opened. They knew every blind spot, every staff rotation, every quiet hour.",
+            "They engineered the rings' overnight transfer schedule to give themselves a 102-minute window between official check-ins.",
+            "Friday at midnight they punched out, drove home, and came back at 1:46 AM through the visiting-team tunnel — the one without a camera since 2023.",
+            "They opened the vault with a code they'd memorized from twenty-two years of changeovers, cut the chain securing the rings with their own bolt cutters, and walked out the way they came in.",
+            "The chipped right heel of their staff boot was a tell they'd never thought about. The forensic team thought about it for them."
+        ],
+        suspectReveal: "The bench finds your suspect — \"The Equipment Manager\" — guilty of grand larceny."
+    )
+
+    // MARK: - Case · The Subterranean Heist (veteran, requires Stadium)
+
+    static let subterraneanHeist = CrimeCase(
+        id: "case-003c-tunnel",
+        title: "The Subterranean Heist",
+        blurb: "First National's Friday-morning audit found the vault floor scorched from below. The night safe was empty. The street-level alarm never tripped.",
+        location: "First National Bank · Sub-Basement Vault",
+        difficulty: .veteran,
+        suspect: Suspect(
+            name: "Unknown",
+            alias: "The Engineer",
+            profileSilhouette: "person.fill.questionmark",
+            known: "City public-works veteran. Designed the storm-sewer rerouting in 2019 that runs beneath the bank."
+        ),
+        sceneIcon: "drop.triangle.fill",
+        sceneTint: [0.16, 0.20, 0.32],
+        evidence: [
+            Evidence(
+                id: "ev-003c-fingerprint",
+                type: .fingerprint,
+                name: "Torch Print",
+                description: "A thumbprint on the steel torch nozzle left in the sewer access shaft.",
+                isIncriminating: true,
+                normalizedX: 0.40,
+                normalizedY: 0.46,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Right thumb. Loop pattern. Pressed in soot — they used the torch with bare hands.",
+                    uvFinding: "Trace acetylene chemistry on the print.",
+                    labFinding: "Print matches the Engineer's public-works ID card.",
+                    forensicVerdict: .strong,
+                    forensicNote: "Their thumb on the torch that cut the vault floor."
+                ),
+                surfaceIcon: "flame.fill",
+                surfaceLabel: "THE SEWER ACCESS SHAFT",
+                judgeLine: "Their thumb on the cutting torch. Accepted."
+            ),
+            Evidence(
+                id: "ev-003c-note",
+                type: .note,
+                name: "Sewer Map",
+                description: "A photocopy of the city's storm-sewer map, marked up in red ink — the route from a manhole to the vault floor traced precisely.",
+                isIncriminating: true,
+                normalizedX: 0.66,
+                normalizedY: 0.30,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Red ballpoint. Distance markings in feet, written in the suspect's neat block-letter style.",
+                    uvFinding: "An erased measurement — the original vault-floor thickness — is still legible under UV.",
+                    labFinding: "Map is a photocopy of a 2019 city plan the suspect personally drafted.",
+                    forensicVerdict: .strong,
+                    forensicNote: "They mapped the route from sewer to vault, on a plan they wrote themselves."
+                ),
+                surfaceIcon: "doc.text.fill",
+                surfaceLabel: "THE PORTABLE TOOL CHEST",
+                judgeLine: "Their map, their route, their hand. Accepted."
+            ),
+            Evidence(
+                id: "ev-003c-photograph",
+                type: .photograph,
+                name: "Annotated Blueprint",
+                description: "A bank blueprint with hand-drawn annotations showing the vault floor's reinforcement pattern.",
+                isIncriminating: true,
+                normalizedX: 0.54,
+                normalizedY: 0.62,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Annotations are in the same hand as the sewer map. Distance marks in inches.",
+                    uvFinding: "A cancelled bank stamp visible on the blueprint — this was a discarded copy from a 2018 renovation.",
+                    labFinding: "The renovation contractor was fired for lost paperwork. The Engineer was their site liaison.",
+                    forensicVerdict: .strong,
+                    forensicNote: "They've had the bank's reinforcement pattern in hand for six years."
+                ),
+                surfaceIcon: "scroll.fill",
+                surfaceLabel: "THE TOOL CHEST LID",
+                judgeLine: "A six-year-old leaked blueprint. Their handwriting on it. Accepted."
+            ),
+            Evidence(
+                id: "ev-003c-footprint",
+                type: .footprint,
+                name: "Sewer Mud",
+                description: "A boot print in dried sewer-mud at the foot of the cut hole in the vault floor.",
+                isIncriminating: true,
+                normalizedX: 0.22,
+                normalizedY: 0.78,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Size 12 rubber boot. Public-works issue. Heel chevron pattern.",
+                    uvFinding: "Mud is from the storm sewer beneath the bank, traceable by chemistry.",
+                    labFinding: "Boot model is on the Engineer's gear-issue inventory.",
+                    forensicVerdict: .strong,
+                    forensicNote: "Their boot, with the city's own sewer mud, on the bank's vault floor."
+                ),
+                surfaceIcon: "shoeprints.fill",
+                surfaceLabel: "THE CUT HOLE'S RIM",
+                judgeLine: "City boots, city mud, on the bank's floor. Accepted."
+            ),
+            Evidence(
+                id: "ev-003c-weapon",
+                type: .weapon,
+                name: "Cutting Torch",
+                description: "An industrial cutting torch with a depleted acetylene tank, abandoned in the access shaft.",
+                isIncriminating: true,
+                normalizedX: 0.78,
+                normalizedY: 0.50,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Vulcan-rated, capable of cutting one inch of vault steel. Asset tag matches city public-works inventory.",
+                    uvFinding: "Steel-vault residue on the cutting head.",
+                    labFinding: "City public-works tools require staff sign-out. The Engineer signed out this torch Tuesday.",
+                    forensicVerdict: .strong,
+                    forensicNote: "The cutting tool, signed out in the suspect's name, with vault steel on the head."
+                ),
+                surfaceIcon: "wrench.adjustable.fill",
+                surfaceLabel: "THE ACCESS SHAFT BASE",
+                judgeLine: "Tool signed out in their name, with the vault's metal on the cutter. Accepted."
+            ),
+            Evidence(
+                id: "ev-003c-hair",
+                type: .hair,
+                name: "Vault Hair",
+                description: "Short hair caught in the vault's interior latch — gray, fine.",
+                isIncriminating: false,
+                normalizedX: 0.34,
+                normalizedY: 0.22,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "6 cm, gray, fine.",
+                    uvFinding: "Trace cologne residue.",
+                    labFinding: "Matches the bank's vault custodian, who closes the vault every night.",
+                    forensicVerdict: .weak,
+                    forensicNote: "Custodian's daily contact. Routine."
+                ),
+                surfaceIcon: "lock.fill",
+                surfaceLabel: "THE VAULT INTERIOR LATCH",
+                judgeLine: "The custodian's hair on the custodian's lock. Discarded."
+            ),
+            Evidence(
+                id: "ev-003c-receipt",
+                type: .receipt,
+                name: "Hardware Slip",
+                description: "A receipt for $32 of plumbing supplies, found on the lobby floor.",
+                isIncriminating: false,
+                normalizedX: 0.14,
+                normalizedY: 0.30,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Standard hardware-store slip. PVC fittings, two valves.",
+                    uvFinding: "Nothing hidden.",
+                    labFinding: "Routine consumer purchase. Card belongs to a teller.",
+                    forensicVerdict: .weak,
+                    forensicNote: "Teller's home plumbing. Not material."
+                ),
+                surfaceIcon: "scroll.fill",
+                surfaceLabel: "THE LOBBY FLOOR",
+                judgeLine: "A teller's home repair. Discarded."
+            )
+        ],
+        minIncriminatingToWin: 4,
+        reward: 1800,
+        fineOnLoss: 700,
+        unlockCost: 0,
+        requiresCaseId: "case-003b-stadium",
+        truth: [
+            "The Engineer had drafted the 2019 storm-sewer rerouting that ran a fourteen-foot section directly beneath the bank's sub-basement vault.",
+            "They kept a discarded blueprint copy from the bank's 2018 renovation, learning the vault floor's reinforcement pattern.",
+            "Wednesday night they walked into a manhole on Lassiter Ave with a public-works torch they'd signed out the day before, and worked the storm shaft for three hours.",
+            "By 4 AM they'd cut a 28-inch hole through the bank's eight-inch reinforced floor, climbed up, emptied the night safe, and dropped back down.",
+            "The street-level alarm never tripped because the vault was breached from below — a vector the bank's threat model had never considered."
+        ],
+        suspectReveal: "The bench finds your suspect — \"The Engineer\" — guilty of grand larceny and conspiracy."
+    )
+
+    // MARK: - Case · The Mansion Auction (veteran, requires Tunnel)
+
+    static let mansionAuction = CrimeCase(
+        id: "case-003d-auction",
+        title: "The Mansion Auction",
+        blurb: "Beaumont's Saturday auction featured a Whistler oil. The room bid $4.2 million. The buyer's specialist looked at it Monday and said the canvas was three weeks old.",
+        location: "Beaumont Auction House · Storage Vault",
+        difficulty: .veteran,
+        suspect: Suspect(
+            name: "Unknown",
+            alias: "The Cataloguer",
+            profileSilhouette: "person.fill.questionmark",
+            known: "Eleven years on the auction floor. Trained the appraisers. Wrote the lot's condition report."
+        ),
+        sceneIcon: "paintpalette.fill",
+        sceneTint: [0.30, 0.18, 0.20],
+        evidence: [
+            Evidence(
+                id: "ev-003d-fingerprint",
+                type: .fingerprint,
+                name: "Frame Print",
+                description: "A thumbprint on the back of the original frame's bracing — the bracing the forgery doesn't have.",
+                isIncriminating: true,
+                normalizedX: 0.40,
+                normalizedY: 0.42,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Right thumb, whorl pattern. Bare-handed contact.",
+                    uvFinding: "Trace conservation-grade acrylic medium — the same one used on the forgery's surface.",
+                    labFinding: "Print matches the Cataloguer's archived staff prints.",
+                    forensicVerdict: .strong,
+                    forensicNote: "Bare hand on the original's bracing, with the forger's medium on the thumb."
+                ),
+                surfaceIcon: "rectangle.portrait.fill",
+                surfaceLabel: "THE ORIGINAL FRAME BACK",
+                judgeLine: "Their thumb, with the forgery's paint on it, on the original frame. Accepted."
+            ),
+            Evidence(
+                id: "ev-003d-note",
+                type: .note,
+                name: "Condition Report",
+                description: "The auction's official condition report — written in the suspect's hand, with one line erased and rewritten.",
+                isIncriminating: true,
+                normalizedX: 0.66,
+                normalizedY: 0.30,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Pencil corrections beneath an inked overwrite. The original line described the canvas's true age accurately.",
+                    uvFinding: "Erased line shows: 'verso shows 1898 paper, original.' The replaced line says: 'verso obscured.'",
+                    labFinding: "Cataloguer's signature on file matches the report. Same hand throughout.",
+                    forensicVerdict: .strong,
+                    forensicNote: "They wrote an accurate report, then walked it back to hide the swap."
+                ),
+                surfaceIcon: "doc.text.fill",
+                surfaceLabel: "THE LOT BINDER",
+                judgeLine: "Their accurate description, erased into a vague one. Accepted."
+            ),
+            Evidence(
+                id: "ev-003d-photograph",
+                type: .photograph,
+                name: "UV Comparison",
+                description: "A pair of UV photos — original Whistler vs. the auctioned forgery — pulled from the appraisal lab's archive.",
+                isIncriminating: true,
+                normalizedX: 0.54,
+                normalizedY: 0.62,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Original shows characteristic 1898 ground-layer fluorescence. Forgery shows uniform modern acrylic.",
+                    uvFinding: "Forgery's fluorescence is identical to a known recent commission from a forger in Trieste.",
+                    labFinding: "Trieste forger's wholesale records (subpoenaed) name the Cataloguer as the buyer six weeks ago.",
+                    forensicVerdict: .strong,
+                    forensicNote: "Documentary chain from forger to suspect to auction. Tight."
+                ),
+                surfaceIcon: "photo.fill",
+                surfaceLabel: "THE APPRAISAL ARCHIVE",
+                judgeLine: "Forger named them as the buyer. UV proves the swap. Accepted."
+            ),
+            Evidence(
+                id: "ev-003d-footprint",
+                type: .footprint,
+                name: "Storage Print",
+                description: "A footprint in archival dust on the climate-controlled storage room floor.",
+                isIncriminating: true,
+                normalizedX: 0.22,
+                normalizedY: 0.74,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Size 8 dress shoe. Narrow heel. Matches the suspect's wardrobe inventory.",
+                    uvFinding: "Dust profile dates the print to the night before the auction.",
+                    labFinding: "Storage room access requires a senior keycard. The Cataloguer's was used at 11:47 PM Friday.",
+                    forensicVerdict: .strong,
+                    forensicNote: "Their shoe, in a room they entered hours before the auction."
+                ),
+                surfaceIcon: "shoeprints.fill",
+                surfaceLabel: "THE STORAGE ROOM FLOOR",
+                judgeLine: "Their shoe, the night before, in the storage room. Accepted."
+            ),
+            Evidence(
+                id: "ev-003d-weapon",
+                type: .weapon,
+                name: "Tipped Knife",
+                description: "An X-Acto knife with a fresh paint chip stuck to the blade.",
+                isIncriminating: true,
+                normalizedX: 0.78,
+                normalizedY: 0.50,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Standard #11 blade. Paint chip is conservation-grade acrylic.",
+                    uvFinding: "Acrylic matches the forgery's medium under UV.",
+                    labFinding: "Knife is part of the suspect's tool kit, registered to their staff locker.",
+                    forensicVerdict: .strong,
+                    forensicNote: "The blade that trimmed the forgery to fit the original frame, with the paint to prove it."
+                ),
+                surfaceIcon: "scissors",
+                surfaceLabel: "THE TOOL KIT",
+                judgeLine: "Their blade, with the forgery's paint on it. Accepted."
+            ),
+            Evidence(
+                id: "ev-003d-hair",
+                type: .hair,
+                name: "Specialist's Hair",
+                description: "Long brown hair on the magnifier in the appraisal lab.",
+                isIncriminating: false,
+                normalizedX: 0.34,
+                normalizedY: 0.22,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "30 cm, dark brown.",
+                    uvFinding: "Trace cosmetic residue.",
+                    labFinding: "Matches the staff appraiser, who works with this magnifier daily.",
+                    forensicVerdict: .weak,
+                    forensicNote: "Routine appraiser contact. Not material."
+                ),
+                surfaceIcon: "magnifyingglass",
+                surfaceLabel: "THE LAB MAGNIFIER",
+                judgeLine: "Appraiser's hair on the appraiser's tool. Discarded."
+            ),
+            Evidence(
+                id: "ev-003d-receipt",
+                type: .receipt,
+                name: "Office Supply Slip",
+                description: "A receipt for archival sleeves, paid by the office Tuesday.",
+                isIncriminating: false,
+                normalizedX: 0.14,
+                normalizedY: 0.30,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Standard supply slip. $87 in archival materials.",
+                    uvFinding: "Nothing hidden.",
+                    labFinding: "Routine office expense. Filed.",
+                    forensicVerdict: .weak,
+                    forensicNote: "Office supplies. Not the swap."
+                ),
+                surfaceIcon: "scroll.fill",
+                surfaceLabel: "THE EXPENSE FOLDER",
+                judgeLine: "Office sleeves. Discarded."
+            )
+        ],
+        minIncriminatingToWin: 4,
+        reward: 2000,
+        fineOnLoss: 800,
+        unlockCost: 0,
+        requiresCaseId: "case-003c-tunnel",
+        truth: [
+            "The Cataloguer had been short on a partner buy-in for two years. They needed seven figures, fast.",
+            "Six weeks before the auction they commissioned a forgery from a workshop in Trieste, paying half up front.",
+            "Friday night, with the auction set for Saturday, they let themselves into the climate-controlled storage room at 11:47 PM, swapped the canvases, and trimmed the new one to fit the old frame.",
+            "Their accurate condition report — describing the original's verso paper — got walked back to a vague paragraph the appraisers wouldn't double-check.",
+            "The buyer's specialist Monday morning ruined a perfect plan with a single sentence: 'This canvas is younger than my last apartment.'"
+        ],
+        suspectReveal: "The bench finds your suspect — \"The Cataloguer\" — guilty of grand larceny and forgery."
     )
 
     static let masquerade = CrimeCase(
@@ -2174,7 +3269,7 @@ enum CaseRepository {
         reward: 3200,
         fineOnLoss: 1100,
         unlockCost: 5000,
-        requiresCaseId: "case-003-diamond",
+        requiresCaseId: "case-003d-auction",
         truth: [
             "The Velvet Mask is Vivienne Marais — old money, social register, and the senator's cousin by marriage.",
             "She held a grudge for fifteen years over a contested estate. The masquerade was her opportunity, and her style.",
@@ -2183,5 +3278,375 @@ enum CaseRepository {
             "She fired once, suppressed. The senator went down. She left her champagne flute on the windowsill (gunpowder bloom and all), tore her mask on the door, dropped a hairpin in the foyer rush, and walked out the front door before the alarm rose. She is, in every way, the case her own evidence makes."
         ],
         suspectReveal: "The bench finds your suspect — \"The Velvet Mask\" (Vivienne Marais) — guilty of murder in the first degree."
+    )
+
+    // MARK: - Case · The Conductor's Last Score (master, requires Masquerade)
+
+    static let conductorsLastScore = CrimeCase(
+        id: "case-004b-conductor",
+        title: "The Conductor's Last Score",
+        blurb: "Halcyon Concert Hall, Friday's gala. The conductor took his bow, walked back through the wings, and was found in the green room with a stiletto under his ribs. Box 12 was empty by then.",
+        location: "Halcyon Concert Hall · Box 12",
+        difficulty: .master,
+        suspect: Suspect(
+            name: "Unknown",
+            alias: "The Patron",
+            profileSilhouette: "person.fill.questionmark",
+            known: "Subscriber for nine seasons. Funded the conductor's chair. Cancelled the funding three weeks ago after a private quarrel."
+        ),
+        sceneIcon: "music.note.list",
+        sceneTint: [0.30, 0.10, 0.16],
+        evidence: [
+            Evidence(
+                id: "ev-004b-fingerprint",
+                type: .fingerprint,
+                name: "Opera Glass Print",
+                description: "A clean thumbprint on the brass rim of the opera glasses left in Box 12.",
+                isIncriminating: true,
+                normalizedX: 0.40,
+                normalizedY: 0.42,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Right thumb, whorl. Bare-handed, deliberate grip.",
+                    uvFinding: "Trace skin oil from a hand that had recently held a steel object — distinct chemical signature.",
+                    labFinding: "Print matches the Patron's monogrammed donor card on file.",
+                    forensicVerdict: .strong,
+                    forensicNote: "Their thumb on the glasses, with metal residue from a freshly handled blade."
+                ),
+                surfaceIcon: "binoculars.fill",
+                surfaceLabel: "BOX 12 BRASS RAIL",
+                judgeLine: "Their thumb, with steel oil on it, on their seat's glasses. Accepted."
+            ),
+            Evidence(
+                id: "ev-004b-weapon",
+                type: .weapon,
+                name: "Stiletto Blade",
+                description: "Slim five-inch stiletto, ornate handle, wedged behind a velvet curtain in the wing corridor.",
+                isIncriminating: true,
+                normalizedX: 0.66,
+                normalizedY: 0.74,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Pearl handle, monogrammed initial 'V.M.' Distinctive maker mark from a Florence atelier.",
+                    uvFinding: "Blood on the blade, partly wiped on the velvet curtain.",
+                    labFinding: "Blood matches the conductor. Initial 'V.M.' matches the Patron's family name.",
+                    forensicVerdict: .strong,
+                    forensicNote: "Their family monogram, the conductor's blood, behind a curtain near the green room."
+                ),
+                surfaceIcon: "scissors",
+                surfaceLabel: "THE WING CURTAIN",
+                judgeLine: "Their initials, his blood, hidden behind their own curtain. Accepted."
+            ),
+            Evidence(
+                id: "ev-004b-bloodstain",
+                type: .bloodstain,
+                name: "Box 12 Spatter",
+                description: "Faint blood spatter on the inner railing of Box 12 — invisible from the audience side.",
+                isIncriminating: true,
+                normalizedX: 0.54,
+                normalizedY: 0.34,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Castoff pattern, consistent with a bare hand wiping a blade clean before sheathing it.",
+                    uvFinding: "Blood is the conductor's, by serology. The spatter is fresh.",
+                    labFinding: "Box 12 was the Patron's box — exclusive subscription, single subscriber.",
+                    forensicVerdict: .strong,
+                    forensicNote: "The blade was wiped in their box. Direct evidentiary link."
+                ),
+                surfaceIcon: "drop.fill",
+                surfaceLabel: "BOX 12 INNER RAIL",
+                judgeLine: "Cleaned the blade in their own box. Accepted."
+            ),
+            Evidence(
+                id: "ev-004b-note",
+                type: .note,
+                name: "Annotated Program",
+                description: "An evening program in Box 12 — the conductor's name circled, with a measure number underlined.",
+                isIncriminating: true,
+                normalizedX: 0.22,
+                normalizedY: 0.50,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Pencil, sharp. The circled name is in the same hand as the donor-card signature.",
+                    uvFinding: "Underlined measure 247 corresponds to the moment the conductor exits stage right — the only time he'd be alone.",
+                    labFinding: "Patron's archived donor signature matches the pencil-pressure profile.",
+                    forensicVerdict: .strong,
+                    forensicNote: "They timed the kill to a specific bar of music. Premeditation in their own hand."
+                ),
+                surfaceIcon: "book.pages.fill",
+                surfaceLabel: "BOX 12 SEAT",
+                judgeLine: "Marked the murder by measure number. Accepted."
+            ),
+            Evidence(
+                id: "ev-004b-photograph",
+                type: .photograph,
+                name: "Patron List Cross-Reference",
+                description: "A printed donor list with one entry circled — the Patron's nine-year subscription, cancelled three weeks ago.",
+                isIncriminating: true,
+                normalizedX: 0.78,
+                normalizedY: 0.62,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Office printout, dated yesterday. The cancellation note in the margin reads: 'private dispute — see file.'",
+                    uvFinding: "Time-stamped 1:14 PM Friday — hours before the gala.",
+                    labFinding: "House manager's filing — they printed it because they'd been wondering whether the Patron would even attend.",
+                    forensicVerdict: .strong,
+                    forensicNote: "The Patron had stopped paying the conductor's salary. They came to the gala anyway."
+                ),
+                surfaceIcon: "doc.text.fill",
+                surfaceLabel: "THE HOUSE MANAGER'S DESK",
+                judgeLine: "Cancelled the funding three weeks ago. Came to the gala anyway. Motive on paper. Accepted."
+            ),
+            Evidence(
+                id: "ev-004b-footprint",
+                type: .footprint,
+                name: "Carpet Print",
+                description: "Heel impression in the green-room carpet, partly buried in fresh dust.",
+                isIncriminating: true,
+                normalizedX: 0.30,
+                normalizedY: 0.78,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Size 7 evening shoe. Pencil-thin heel. Distinctive Italian last.",
+                    uvFinding: "Carpet dust profile dates the print to within thirty minutes of the murder.",
+                    labFinding: "Shoe model matches a custom commission to the Patron from a Florence cobbler.",
+                    forensicVerdict: .strong,
+                    forensicNote: "Their custom shoe, in the green room, in the relevant window."
+                ),
+                surfaceIcon: "shoeprints.fill",
+                surfaceLabel: "THE GREEN-ROOM CARPET",
+                judgeLine: "Their heel, custom-made, in the green room. Accepted."
+            ),
+            Evidence(
+                id: "ev-004b-hair",
+                type: .hair,
+                name: "Costume Hair",
+                description: "Long brown hair on a violinist's tail-coat hanging in the wings.",
+                isIncriminating: false,
+                normalizedX: 0.18,
+                normalizedY: 0.30,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "30 cm, brown. Cuticle intact.",
+                    uvFinding: "Trace cosmetic residue.",
+                    labFinding: "Matches the orchestra's principal violist, who hugged the violinist before curtain.",
+                    forensicVerdict: .weak,
+                    forensicNote: "Backstage routine. Not material."
+                ),
+                surfaceIcon: "person.fill",
+                surfaceLabel: "THE WING COSTUME RACK",
+                judgeLine: "Backstage hug. Discarded."
+            ),
+            Evidence(
+                id: "ev-004b-receipt",
+                type: .receipt,
+                name: "Bar Tab",
+                description: "An intermission bar tab signed by an audience member, found in the lobby.",
+                isIncriminating: false,
+                normalizedX: 0.46,
+                normalizedY: 0.18,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Standard hospitality slip. Two glasses of champagne, $48.",
+                    uvFinding: "Nothing hidden.",
+                    labFinding: "Patron is a season-ticket holder unrelated to the suspect.",
+                    forensicVerdict: .weak,
+                    forensicNote: "Other patron's drinks. Not material."
+                ),
+                surfaceIcon: "scroll.fill",
+                surfaceLabel: "THE LOBBY BAR",
+                judgeLine: "Someone else's intermission. Discarded."
+            )
+        ],
+        minIncriminatingToWin: 5,
+        reward: 3600,
+        fineOnLoss: 1300,
+        unlockCost: 0,
+        requiresCaseId: "case-004-masquerade",
+        truth: [
+            "The Patron — Valeria Marchetti, V.M. — funded the conductor's chair for nine years. The two had a long affair, which she ended three weeks ago after she discovered a second one.",
+            "She kept her box subscription and cancelled the conductor's funding by letter.",
+            "Friday she arrived in Box 12 at 7:30 PM with a stiletto in her clutch and a marked program — measure 247 underlined, the moment he'd exit the stage alone.",
+            "When the conductor walked into the green room at 10:18, she was waiting in the wing corridor. She struck once, low and fast, wiped the blade in her own box, and rejoined the audience for the final movement.",
+            "She forgot the carpet was new. The pencil-thin heel of her custom Florentine shoe pressed clean enough into the fresh fibers to match an exact pair on file."
+        ],
+        suspectReveal: "The bench finds your suspect — \"The Patron\" (Valeria Marchetti) — guilty of murder in the first degree."
+    )
+
+    // MARK: - Case · The Yacht Murder (master, requires Conductor)
+
+    static let yachtMurder = CrimeCase(
+        id: "case-004c-yacht",
+        title: "The Yacht Murder",
+        blurb: "The M/V Lassiter sailed Tuesday with seven souls aboard. Friday morning the senator's daughter washed up in a tide pool with a head wound. The boat docked Saturday with six.",
+        location: "M/V Lassiter · Open Water",
+        difficulty: .master,
+        suspect: Suspect(
+            name: "Unknown",
+            alias: "The First Mate",
+            profileSilhouette: "person.fill.questionmark",
+            known: "Six years on the Lassiter. Held the only set of cabin keys besides the captain's. The senator hired him personally."
+        ),
+        sceneIcon: "sailboat.fill",
+        sceneTint: [0.10, 0.20, 0.36],
+        evidence: [
+            Evidence(
+                id: "ev-004c-fingerprint",
+                type: .fingerprint,
+                name: "Rail Print",
+                description: "A clean palm print on the starboard rail near the cabin where the daughter slept.",
+                isIncriminating: true,
+                normalizedX: 0.40,
+                normalizedY: 0.42,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Right palm, full impression. Pressed hard — the suspect was bracing against the rail.",
+                    uvFinding: "Trace fish-blood from a recent gutting — the suspect had been working the galley.",
+                    labFinding: "Print matches the First Mate's crew-onboarding fingerprint card.",
+                    forensicVerdict: .strong,
+                    forensicNote: "Bracing on the rail, near the cabin, with galley residue still on the hand."
+                ),
+                surfaceIcon: "hand.raised.fill",
+                surfaceLabel: "THE STARBOARD RAIL",
+                judgeLine: "Their palm, with the galley's blood on it. Accepted."
+            ),
+            Evidence(
+                id: "ev-004c-weapon",
+                type: .weapon,
+                name: "Knotted Line",
+                description: "A 30-cm length of nylon line tied off with a distinctive double half-hitch, found jammed in the bilge pump intake.",
+                isIncriminating: true,
+                normalizedX: 0.66,
+                normalizedY: 0.74,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "The knot is a maritime double half-hitch — taught only at one academy on the eastern seaboard.",
+                    uvFinding: "Hair caught in the line strands matches the daughter's.",
+                    labFinding: "The First Mate is the only crew member who attended that academy.",
+                    forensicVerdict: .strong,
+                    forensicNote: "Their signature knot, with the victim's hair in it, jammed in a place it shouldn't be."
+                ),
+                surfaceIcon: "scribble.variable",
+                surfaceLabel: "THE BILGE INTAKE",
+                judgeLine: "Their knot, her hair. Accepted."
+            ),
+            Evidence(
+                id: "ev-004c-bloodstain",
+                type: .bloodstain,
+                name: "Cabin Door Smear",
+                description: "A faint smear of dried blood on the inside of the daughter's cabin door — wiped, but not cleanly.",
+                isIncriminating: true,
+                normalizedX: 0.54,
+                normalizedY: 0.30,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Smear is consistent with a hand pulling the door closed from inside while wounded.",
+                    uvFinding: "Blood is the daughter's.",
+                    labFinding: "Cabin was supposedly locked at the time of disappearance — only the captain and First Mate had keys.",
+                    forensicVerdict: .strong,
+                    forensicNote: "She was wounded inside the cabin, then somehow ended up overboard."
+                ),
+                surfaceIcon: "drop.fill",
+                surfaceLabel: "THE CABIN DOOR",
+                judgeLine: "She was hurt inside her own locked cabin. Accepted."
+            ),
+            Evidence(
+                id: "ev-004c-note",
+                type: .note,
+                name: "Forged Log Entry",
+                description: "Thursday's deck log entry — written in the First Mate's hand, claiming the daughter was 'observed on deck at 22:00.'",
+                isIncriminating: true,
+                normalizedX: 0.22,
+                normalizedY: 0.50,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Standard deck-log format. Time written in heavier ink than the surrounding entries — added later.",
+                    uvFinding: "Underlying erasure: the original entry simply read '22:00 — quiet.'",
+                    labFinding: "Cook's testimony places the daughter in the galley at 21:30 and not seen again.",
+                    forensicVerdict: .strong,
+                    forensicNote: "They forged a log entry to create a false sighting after she was already missing."
+                ),
+                surfaceIcon: "book.fill",
+                surfaceLabel: "THE BRIDGE LOG",
+                judgeLine: "False sighting, in their own hand. Accepted."
+            ),
+            Evidence(
+                id: "ev-004c-photograph",
+                type: .photograph,
+                name: "Sat-Phone Records",
+                description: "Subpoenaed satellite-phone records showing a 4-minute call from the boat to a Newark number at 22:14 Thursday.",
+                isIncriminating: true,
+                normalizedX: 0.78,
+                normalizedY: 0.62,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Call originated from the bridge handset.",
+                    uvFinding: "Records authenticated by the carrier.",
+                    labFinding: "Newark number traces to a private investigator the suspect retained six weeks earlier.",
+                    forensicVerdict: .strong,
+                    forensicNote: "They called their PI minutes after the incident. Pre-arranged contact."
+                ),
+                surfaceIcon: "phone.fill",
+                surfaceLabel: "THE SUBPOENA FILE",
+                judgeLine: "A four-minute call to their own PI, ten minutes after she was hurt. Accepted."
+            ),
+            Evidence(
+                id: "ev-004c-footprint",
+                type: .footprint,
+                name: "Sea Boot Print",
+                description: "A wet sea-boot print in the cabin's interior carpet, salt-stained and recent.",
+                isIncriminating: true,
+                normalizedX: 0.30,
+                normalizedY: 0.78,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Size 12 sea boot. Crew issue. Distinctive ladder-step rubber.",
+                    uvFinding: "Salt content matches recent submersion in deep water — the boot had been overboard.",
+                    labFinding: "Boot model matches the First Mate's crew-issue inventory.",
+                    forensicVerdict: .strong,
+                    forensicNote: "Their boot, recently in the water, on the cabin carpet."
+                ),
+                surfaceIcon: "shoeprints.fill",
+                surfaceLabel: "THE CABIN CARPET",
+                judgeLine: "Their wet boot, in her cabin. Accepted."
+            ),
+            Evidence(
+                id: "ev-004c-hair",
+                type: .hair,
+                name: "Galley Hair",
+                description: "Short hair on the galley counter, near the rinsed knives.",
+                isIncriminating: false,
+                normalizedX: 0.18,
+                normalizedY: 0.22,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "5 cm, gray. Beard hair.",
+                    uvFinding: "Garlic and onion residue.",
+                    labFinding: "Matches the cook, who works the galley daily.",
+                    forensicVerdict: .weak,
+                    forensicNote: "Cook's daily contact. Routine."
+                ),
+                surfaceIcon: "fork.knife",
+                surfaceLabel: "THE GALLEY COUNTER",
+                judgeLine: "The cook in his own galley. Discarded."
+            ),
+            Evidence(
+                id: "ev-004c-receipt",
+                type: .receipt,
+                name: "Provisioning Slip",
+                description: "A slip from the dock-side market the morning the boat departed.",
+                isIncriminating: false,
+                normalizedX: 0.46,
+                normalizedY: 0.18,
+                analysis: EvidenceAnalysis(
+                    magnifierFinding: "Provisions list — fish, greens, eggs, ice. Routine.",
+                    uvFinding: "Nothing hidden.",
+                    labFinding: "Standard departure provisioning. Filed with the captain's records.",
+                    forensicVerdict: .weak,
+                    forensicNote: "Routine groceries. Not material."
+                ),
+                surfaceIcon: "scroll.fill",
+                surfaceLabel: "THE CAPTAIN'S CLIPBOARD",
+                judgeLine: "Tuesday's groceries. Discarded."
+            )
+        ],
+        minIncriminatingToWin: 5,
+        reward: 4000,
+        fineOnLoss: 1500,
+        unlockCost: 0,
+        requiresCaseId: "case-004b-conductor",
+        truth: [
+            "The First Mate had been the senator's man for six years — and the senator's daughter's man for three.",
+            "When she told him Thursday afternoon she was breaking it off — and that her father was about to find out — he had hours to decide.",
+            "At 22:00 he came below to her cabin under the pretext of a maintenance check, and struck her with a winch handle as the door closed.",
+            "He bound her wrists with his signature double half-hitch, dropped her over the starboard rail, and tried to clear the line by jamming it down through the bilge intake.",
+            "He called his retained PI four minutes after, who got him a clean alibi for Friday morning's port stop. Then he forged a deck-log sighting to widen the window of confusion. The line in the bilge, the boot in her carpet, and the call he couldn't take back gave him to the bench."
+        ],
+        suspectReveal: "The bench finds your suspect — \"The First Mate\" — guilty of murder in the first degree."
     )
 }
