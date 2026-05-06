@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct CourtroomView: View {
+    static let maxSubmissions: Int = 3
+
     let crimeCase: CrimeCase
     let collectedEvidence: [Evidence]
     @Binding var path: NavigationPath
@@ -10,6 +12,10 @@ struct CourtroomView: View {
     @State private var selected: Set<String> = []
     @State private var showConfirm = false
     @State private var inspecting: Evidence?
+
+    private var atSelectionCap: Bool {
+        selected.count >= Self.maxSubmissions
+    }
 
     var body: some View {
         ZStack {
@@ -49,7 +55,7 @@ struct CourtroomView: View {
                     Text(crimeCase.title)
                         .font(.system(.title3, design: .serif).weight(.semibold))
                         .foregroundStyle(Theme.textPrimary)
-                    Text("Select the exhibits you wish to enter into evidence. Choose carefully — the bench has no patience for chaff.")
+                    Text("Submit 1 to \(Self.maxSubmissions) exhibits. Choose carefully — the bench has no patience for chaff.")
                         .font(.system(.subheadline, design: .serif).italic())
                         .foregroundStyle(Theme.textSecondary)
                         .multilineTextAlignment(.center)
@@ -72,15 +78,20 @@ struct CourtroomView: View {
                     ScrollView {
                         VStack(spacing: 10) {
                             ForEach(collectedEvidence) { ev in
+                                let isSelected = selected.contains(ev.id)
+                                let lockedOut = !isSelected && atSelectionCap
                                 CourtEvidenceRow(
                                     evidence: ev,
-                                    selected: selected.contains(ev.id),
+                                    selected: isSelected,
                                     onToggle: {
-                                        Haptics.tap()
-                                        if selected.contains(ev.id) {
+                                        if isSelected {
+                                            Haptics.tap()
                                             selected.remove(ev.id)
-                                        } else {
+                                        } else if !atSelectionCap {
+                                            Haptics.tap()
                                             selected.insert(ev.id)
+                                        } else {
+                                            Haptics.failure()
                                         }
                                     },
                                     onInspect: {
@@ -88,6 +99,7 @@ struct CourtroomView: View {
                                         inspecting = ev
                                     }
                                 )
+                                .opacity(lockedOut ? 0.45 : 1.0)
                             }
 
                             Text("Tap the magnifier to review what your analyses revealed.")
@@ -103,9 +115,9 @@ struct CourtroomView: View {
                 // Bottom action
                 VStack(spacing: 8) {
                     HStack {
-                        Text("\(selected.count) selected")
+                        Text("\(selected.count) of \(Self.maxSubmissions) selected")
                             .font(.system(size: 12, weight: .semibold, design: .rounded))
-                            .foregroundStyle(Theme.textSecondary)
+                            .foregroundStyle(atSelectionCap ? Theme.gold : Theme.textSecondary)
                         Spacer()
                         Text("Min: \(crimeCase.minIncriminatingToWin) incriminating")
                             .font(.system(size: 12, weight: .semibold, design: .rounded))

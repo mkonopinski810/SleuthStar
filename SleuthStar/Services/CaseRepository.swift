@@ -2584,7 +2584,7 @@ enum CaseRepository {
                 judgeLine: "A documented courier with a signed delivery log. Discarded."
             )
         ],
-        minIncriminatingToWin: 4,
+        minIncriminatingToWin: 3,
         reward: 1450,
         fineOnLoss: 520,
         unlockCost: 2200,
@@ -2750,7 +2750,7 @@ enum CaseRepository {
                 judgeLine: "A reporter's parking. Discarded."
             )
         ],
-        minIncriminatingToWin: 4,
+        minIncriminatingToWin: 3,
         reward: 1600,
         fineOnLoss: 600,
         unlockCost: 0,
@@ -2916,7 +2916,7 @@ enum CaseRepository {
                 judgeLine: "A teller's home repair. Discarded."
             )
         ],
-        minIncriminatingToWin: 4,
+        minIncriminatingToWin: 3,
         reward: 1800,
         fineOnLoss: 700,
         unlockCost: 0,
@@ -3082,7 +3082,7 @@ enum CaseRepository {
                 judgeLine: "Office sleeves. Discarded."
             )
         ],
-        minIncriminatingToWin: 4,
+        minIncriminatingToWin: 3,
         reward: 2000,
         fineOnLoss: 800,
         unlockCost: 0,
@@ -3265,7 +3265,7 @@ enum CaseRepository {
                 judgeLine: "The server fainted on discovery. We have her on tape. Discarded."
             )
         ],
-        minIncriminatingToWin: 5,
+        minIncriminatingToWin: 3,
         reward: 3200,
         fineOnLoss: 1100,
         unlockCost: 5000,
@@ -3450,7 +3450,7 @@ enum CaseRepository {
                 judgeLine: "Someone else's intermission. Discarded."
             )
         ],
-        minIncriminatingToWin: 5,
+        minIncriminatingToWin: 3,
         reward: 3600,
         fineOnLoss: 1300,
         unlockCost: 0,
@@ -3635,7 +3635,7 @@ enum CaseRepository {
                 judgeLine: "Tuesday's groceries. Discarded."
             )
         ],
-        minIncriminatingToWin: 5,
+        minIncriminatingToWin: 3,
         reward: 4000,
         fineOnLoss: 1500,
         unlockCost: 0,
