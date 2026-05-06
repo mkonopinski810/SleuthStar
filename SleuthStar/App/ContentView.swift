@@ -81,7 +81,7 @@ struct ContentView: View {
             CareerView()
 
         case .leaderboard:
-            LeaderboardView()
+            LeaderboardView(path: $path)
         }
     }
 

@@ -1,7 +1,9 @@
 import SwiftUI
 
 struct LeaderboardView: View {
+    @Binding var path: NavigationPath
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var game: GameStateManager
     @ObservedObject private var gc = GameCenterManager.shared
 
     @State private var selectedCase: CrimeCase = CaseRepository.first()
@@ -21,6 +23,7 @@ struct LeaderboardView: View {
                         notSignedInCard
                     } else {
                         casePicker
+                        attemptButton
                         scopePicker
                         leaderboardBody
                     }
@@ -207,6 +210,68 @@ struct LeaderboardView: View {
             .padding(.horizontal, 16)
             .padding(.bottom, 24)
         }
+    }
+
+    // MARK: - Attempt button
+
+    private var isCaseUnlocked: Bool {
+        game.isUnlocked(selectedCase)
+    }
+
+    private var lockedReason: String? {
+        guard !isCaseUnlocked else { return nil }
+        if let reqId = selectedCase.requiresCaseId,
+           !game.profile.solvedCaseIds.contains(reqId),
+           let prereq = CaseRepository.byId(reqId) {
+            return "Solve \"\(prereq.title)\" first"
+        }
+        if selectedCase.unlockCost > 0,
+           game.profile.fingerprints < selectedCase.unlockCost {
+            return "Costs \(selectedCase.unlockCost) fp to unlock"
+        }
+        return "Locked"
+    }
+
+    @ViewBuilder
+    private var attemptButton: some View {
+        let locked = !isCaseUnlocked
+        let solved = game.profile.solvedCaseIds.contains(selectedCase.id)
+        let title = solved ? "Improve Your Time" : "Attempt This Case"
+        let icon = solved ? "stopwatch.fill" : "play.fill"
+
+        Button {
+            guard !locked else {
+                Haptics.failure()
+                return
+            }
+            Haptics.tap()
+            path.append(AppRoute.intro(caseId: selectedCase.id))
+        } label: {
+            HStack(spacing: 10) {
+                Image(systemName: locked ? "lock.fill" : icon)
+                    .font(.system(size: 14, weight: .heavy))
+                Text(locked ? (lockedReason ?? "Locked") : title)
+                    .font(.system(.subheadline, design: .serif).weight(.semibold))
+                Spacer()
+                if !locked {
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 13, weight: .heavy))
+                }
+            }
+            .foregroundStyle(locked ? Theme.textMuted : Theme.midnight)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 13)
+            .background(
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .fill(locked ? Theme.coal.opacity(0.6) : Theme.gold)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .strokeBorder(locked ? Theme.textMuted.opacity(0.3) : Color.clear, lineWidth: 1)
+            )
+        }
+        .buttonStyle(PressableButtonStyle())
+        .disabled(locked)
     }
 
     // MARK: - Scope picker
