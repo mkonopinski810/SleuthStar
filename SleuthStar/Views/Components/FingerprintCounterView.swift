@@ -6,15 +6,11 @@ struct FingerprintCounterView: View {
 
     var body: some View {
         HStack(spacing: 8) {
-            ZStack {
-                Circle()
-                    .fill(Theme.goldGradient)
-                    .frame(width: compact ? 26 : 30, height: compact ? 26 : 30)
-                    .shadow(color: Theme.gold.opacity(0.4), radius: 6)
-                Image(systemName: "fingerprint")
-                    .font(.system(size: compact ? 14 : 16, weight: .heavy))
-                    .foregroundStyle(Theme.midnight)
-            }
+            Image(systemName: "fingerprint")
+                .font(.system(size: compact ? 22 : 26, weight: .heavy))
+                .foregroundStyle(Theme.goldGradient)
+                .shadow(color: Theme.gold.opacity(0.55), radius: 6)
+                .frame(width: compact ? 26 : 30, height: compact ? 26 : 30)
 
             Text(amount.formattedFingerprints)
                 .font(.system(size: compact ? 16 : 18, weight: .bold, design: .rounded))
