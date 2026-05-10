@@ -148,7 +148,21 @@ final class GameStateManager: ObservableObject {
            !profile.solvedCaseIds.contains(req) {
             return false
         }
+        if profile.purchasedCaseIds.contains(crimeCase.id) { return true }
         return crimeCase.unlockCost == 0
+    }
+
+    @discardableResult
+    func purchase(_ crimeCase: CrimeCase) -> Bool {
+        if profile.purchasedCaseIds.contains(crimeCase.id) { return false }
+        if crimeCase.unlockCost == 0 { return false }
+        if let req = crimeCase.requiresCaseId,
+           !profile.solvedCaseIds.contains(req) {
+            return false
+        }
+        guard spendFingerprints(crimeCase.unlockCost) else { return false }
+        profile.purchasedCaseIds.insert(crimeCase.id)
+        return true
     }
 
     // MARK: - Shop

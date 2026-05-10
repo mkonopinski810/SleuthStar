@@ -48,6 +48,13 @@ struct OfficeView: View {
                                 onSelect: {
                                     if game.isUnlocked(crime) {
                                         path.append(AppRoute.intro(caseId: crime.id))
+                                    } else if prereqMet(for: crime),
+                                              crime.unlockCost > 0,
+                                              game.profile.fingerprints >= crime.unlockCost {
+                                        if game.purchase(crime) {
+                                            Haptics.success()
+                                            path.append(AppRoute.intro(caseId: crime.id))
+                                        }
                                     }
                                 }
                             )
