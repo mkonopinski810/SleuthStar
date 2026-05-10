@@ -24,8 +24,12 @@ struct LeaderboardView: View {
                     } else {
                         casePicker
                         attemptButton
-                        scopePicker
-                        leaderboardBody
+                        if GameCenterManager.hasLiveLeaderboard(for: selectedCase.id) {
+                            scopePicker
+                            leaderboardBody
+                        } else {
+                            comingSoonCard
+                        }
                     }
                 }
                 .padding(.horizontal, 18)
@@ -101,6 +105,28 @@ struct LeaderboardView: View {
             Spacer(minLength: 12)
         }
         .padding(20)
+        .glassCard(corner: 16)
+    }
+
+    // MARK: - Coming soon
+
+    private var comingSoonCard: some View {
+        VStack(spacing: 12) {
+            Image(systemName: "trophy.circle")
+                .font(.system(size: 46, weight: .heavy))
+                .foregroundStyle(Theme.gold)
+                .padding(.top, 18)
+            Text("Leaderboard arriving soon")
+                .font(.system(.title3, design: .serif).weight(.bold))
+                .foregroundStyle(Theme.textPrimary)
+            Text("This case's Time Attack board ships with a future update. Times posted before then won't appear on the global ranking.")
+                .font(.system(.subheadline, design: .serif).italic())
+                .foregroundStyle(Theme.textSecondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 18)
+                .padding(.bottom, 18)
+        }
+        .frame(maxWidth: .infinity)
         .glassCard(corner: 16)
     }
 

@@ -47,6 +47,22 @@ final class GameCenterManager: ObservableObject {
         leaderboardIDs[caseId]
     }
 
+    /// Leaderboards that have been provisioned in App Store Connect AND attached to
+    /// a shipping/in-review build. Cases outside this set will render a "coming soon"
+    /// state in the leaderboard view, and scores aren't submitted for them.
+    static let liveLeaderboardCaseIds: Set<String> = [
+        "case-001-rooftop",
+        "case-001b-diner",
+        "case-001c-greenhouse",
+        "case-002-midnight",
+        "case-003-diamond",
+        "case-004-masquerade"
+    ]
+
+    static func hasLiveLeaderboard(for caseId: String) -> Bool {
+        liveLeaderboardCaseIds.contains(caseId)
+    }
+
     /// Kick off Game Center authentication. Should be called once at app launch.
     /// If the player needs to log in, iOS will present its own sign-in sheet.
     func authenticate() {
@@ -77,6 +93,7 @@ final class GameCenterManager: ObservableObject {
     /// or if no leaderboard ID is registered for the case.
     func submitTime(caseId: String, milliseconds: Int) async {
         guard isAuthenticated else { return }
+        guard Self.hasLiveLeaderboard(for: caseId) else { return }
         guard let lbId = Self.leaderboardID(for: caseId) else { return }
         do {
             try await GKLeaderboard.submitScore(
